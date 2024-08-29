@@ -26,7 +26,7 @@ export function ThemeSwitcher() {
                 key="light"
                 title={
                     <Tooltip content='Light' size="sm">
-                        <Sun size={15}/>
+                        <Sun size={15} strokeWidth={2} className="text-foreground"/>
                     </Tooltip>
                 }
                 className="px-[5px]"
@@ -35,7 +35,7 @@ export function ThemeSwitcher() {
                 key="system"
                 title={
                     <Tooltip content='System' size="sm">
-                        <Monitor size={15}/>
+                        <Monitor size={15} strokeWidth={2} className="text-foreground"/>
                     </Tooltip>
                 }
                 className="px-[5px]"
@@ -44,7 +44,7 @@ export function ThemeSwitcher() {
                 key="dark"
                 title={
                     <Tooltip content='Dark' size="sm">
-                        <Moon size={15}/>
+                        <Moon size={15} strokeWidth={2} className="text-foreground"/>
                     </Tooltip>
                 }
                 className="px-[5px]"

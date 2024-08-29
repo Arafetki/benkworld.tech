@@ -1,35 +1,35 @@
-import { Link } from "@nextui-org/react";
-
-import LinkedinIcon from "@/components/icons/linkedin";
-import GithubIcon from "@/components/icons/github";
+import { Icon } from '@iconify/react';
 
 const socials = [
     {
         name: 'Linkedin',
         href: 'https://www.linkedin.com/in/arafet-ben-kilani/',
-        icon: <LinkedinIcon className="size-5"/>
+        icon: <Icon icon='mdi:linkedin' height={22} width={22}/>
     },
     {
         name: 'Github',
         href: 'https://github.com/arafetki',
-        icon: <GithubIcon className="size-5"/>
+        icon: <Icon icon='mdi:github' height={22} width={22}/>
     },
+    {
+        name: 'Medium',
+        href: 'https://medium.com/@mr.arafetk',
+        icon: <Icon icon='basil:medium-solid' height={22} width={22}/>
+    }
 ]
 
-export default function Socials() {
+export function Socials() {
     return (
-        <ul className="flex gap-2">
+        <ul className="flex items-center gap-2">
             {socials.map(sm=>(
                 <li key={sm.name}>
-                    <Link
-                        isExternal
+                    <a
                         href={sm.href}
                         rel="noopener noreferrer"
                         target="_blank"
-                        color="foreground"
                     >
                         {sm.icon}
-                    </Link>
+                    </a>
                 </li>
             ))}
         </ul>
