@@ -5,6 +5,8 @@ import "./globals.css";
 import Providers from "@/components/providers";
 import Navbar from "@/components/navigation/navbar";
 import Footer from "@/components/layout/footer";
+import { Toaster } from "@/components/ui/toaster"
+
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -37,6 +39,7 @@ export default function RootLayout({
           <Navbar/>
           <main className="grow flex flex-col">{children}</main>
           <Footer/>
+          <Toaster/>
         </Providers>
       </body>
     </html>

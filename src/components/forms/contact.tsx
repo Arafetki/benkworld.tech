@@ -6,10 +6,13 @@ import {useForm,SubmitHandler} from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { ContactFormData } from "@/types";
 import { contactFormSchema } from "@/zod";
+import { useToast } from "@/components/ui/use-toast"
+
 
 export default function ContactForm({formId}:{formId: string}) {
 
     const mounted = useIsMounted()
+    const {toast} = useToast()
     const {
         register,
         handleSubmit,
@@ -26,6 +29,10 @@ export default function ContactForm({formId}:{formId: string}) {
 
     const onSubmit: SubmitHandler<ContactFormData> = (data) => {
         console.log(data);
+        toast({
+            description: "Message sent successfully!",
+            variant: 'success'
+        })
     }
 
     if (!mounted) return null;
