@@ -1,8 +1,7 @@
 import type { SVGProps } from 'react';
+import { MoonIcon, SunIcon } from "@radix-ui/react-icons"
 import {
     Mail, 
-    Sun, 
-    Moon, 
     Monitor, 
     X, 
     Menu, 
@@ -22,8 +21,8 @@ export const Icons = {
     logo: GraduationCap,
     close: X,
     burgerMenu: Menu,
-    sun: Sun,
-    moon: Moon,
+    sun: SunIcon,
+    moon: MoonIcon,
     monitor: Monitor,
     mail: Mail,
     eye: Eye,
