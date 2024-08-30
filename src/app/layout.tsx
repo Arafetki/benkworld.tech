@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Roboto_Mono, Poppins } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 
 import Providers from "@/components/providers";
@@ -15,15 +15,9 @@ const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500','600','700','800','900']  
 })
 
-const robotoMono = Roboto_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-roboto-mono',
-  weight: ['100', '300', '400', '500', '700']
-});
 
 export const metadata: Metadata = {
-  title: "Home | Benk World",
+  description: "Benk World - Personal portfolio and blog showcasing IT projects and insights.",
 };
 
 export default function RootLayout({

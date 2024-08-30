@@ -1,13 +1,14 @@
 'use client';
 
-import { Card, CardHeader, CardBody, CardFooter, Button, Input, Textarea } from "@nextui-org/react";
+import { Card, CardHeader, CardBody, CardFooter, Button, Input, Textarea, Spinner } from "@nextui-org/react";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import {useForm,SubmitHandler} from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { ContactFormData } from "@/types";
 import { contactFormSchema } from "@/zod";
 import { useToast } from "@/components/ui/use-toast"
-
+import { ToastAction } from "@/components/ui/toast"
+import { wait } from "@/lib/utils";
 
 export default function ContactForm({formId}:{formId: string}) {
 
@@ -16,7 +17,7 @@ export default function ContactForm({formId}:{formId: string}) {
     const {
         register,
         handleSubmit,
-        formState: {errors}
+        formState: {errors, isSubmitting}
     } = useForm({
         resolver: zodResolver(contactFormSchema),
         defaultValues: {
@@ -27,24 +28,37 @@ export default function ContactForm({formId}:{formId: string}) {
         }
     })
 
-    const onSubmit: SubmitHandler<ContactFormData> = (data) => {
-        console.log(data);
-        toast({
-            description: "Message sent successfully!",
-            variant: 'success'
-        })
+    const onSubmit: SubmitHandler<ContactFormData> = async (data) => {
+        try {
+            await wait(2000);
+            console.log(data);
+            throw new Error()
+            toast({
+                description: "Message sent successfully!",
+                variant: 'success'
+            })
+        } catch (err) {
+            if (err instanceof Error) {
+                toast({
+                    title: "Uh oh! Something went wrong.",
+                    description: "There was a problem with your request",
+                    variant: 'destructive',
+                    action: <ToastAction altText="Try again">Try again</ToastAction>,
+                })
+            }
+        }
     }
 
-    if (!mounted) return null;
+    if (!mounted) return <Spinner color="default" size="lg"/>;
 
     return (
         <Card 
-            className="w-full max-w-xl px-4 py-6 sm:px-6 sm:py-8 bg-foreground-50/50" 
+            className="w-full max-w-xl px-4 py-6 sm:px-6 sm:py-8 bg-card/10" 
             shadow='lg'
             radius="sm"
         >
             <CardHeader>
-                <h1 className="font-bold text-2xl sm:text-3xl">Get In Touch</h1>
+                <h1 className="font-bold text-2xl sm:text-3xl text-card-foreground">Get In Touch</h1>
             </CardHeader>
             <CardBody>
                 <form
@@ -59,7 +73,7 @@ export default function ContactForm({formId}:{formId: string}) {
                         variant="bordered"
                         isClearable
                         isRequired
-                        isInvalid={errors.name? true: false}
+                        isInvalid={!!errors.name}
                         errorMessage={errors.name?.message}
                     />
                     <Input
@@ -70,8 +84,8 @@ export default function ContactForm({formId}:{formId: string}) {
                         variant="bordered"
                         isClearable
                         isRequired
-                        isInvalid={errors.email? true: false}
-                        errorMessage={errors.email?.message}                        
+                        isInvalid={!!errors.email}
+                        errorMessage={errors.email?.message}
                     />
                     <Input
                         {...register('subject')}
@@ -79,8 +93,8 @@ export default function ContactForm({formId}:{formId: string}) {
                         radius="sm"
                         variant="bordered"
                         isClearable
-                        isInvalid={errors.subject? true: false}
-                        errorMessage={errors.subject?.message}                          
+                        isInvalid={!!errors.subject}
+                        errorMessage={errors.subject?.message}
                     />
                     <Textarea
                         {...register('message')}
@@ -90,10 +104,10 @@ export default function ContactForm({formId}:{formId: string}) {
                         isRequired
                         minRows={5}
                         maxRows={8}
-                        isInvalid={errors.message? true: false}
-                        errorMessage={errors.message?.message}                               
+                        isInvalid={!!errors.message}
+                        errorMessage={errors.message?.message}
                     />
-                </form>                
+                </form>
             </CardBody>
             <CardFooter>
                 <Button 
@@ -101,9 +115,10 @@ export default function ContactForm({formId}:{formId: string}) {
                     form={formId}
                     color="primary"
                     radius="sm"
+                    disabled={isSubmitting}
                 >
-                    Send Message
-                </Button>                
+                    {isSubmitting? 'Sending...': 'Send Message'}
+                </Button>
             </CardFooter>
         </Card>
     );

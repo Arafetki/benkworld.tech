@@ -11,11 +11,13 @@ export default function Navbar() {
 
         <NavbarNextUI
             isMenuOpen={isMenuOpen}
+            isBlurred
+            maxWidth="xl"
             onMenuOpenChange={setIsMenuOpen}
         >
             <NavbarItem>
-                <Link onPress={()=>{if (isMenuOpen) setIsMenuOpen(false)}} href="/" className="text-lg text-foreground font-bold">
-                    BenK World
+                <Link onPress={()=>{if (isMenuOpen) setIsMenuOpen(false)}} href="/" color="foreground" className="text-lg sm:text-2xl font-bold">
+                    BenK <span className="text-primary">World</span>
                 </Link>
             </NavbarItem>
             <NavbarContent className="hidden sm:flex gap-3">
