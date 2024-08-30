@@ -2,7 +2,7 @@ import ContactForm from "@/components/forms/contact";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Contact Me | Benk World"
+    title: "Contact Me"
 }
 
 export default function ContactPage() {

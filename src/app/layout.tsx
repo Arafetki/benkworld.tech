@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { siteConfig } from "@/config/site";
+import { Toaster } from "@/components/ui/toaster";
+import { Providers } from "@/components/providers";
 import "./globals.css";
 
-import Providers from "@/components/providers";
-import Navbar from "@/components/navigation/navbar";
 import Footer from "@/components/layout/footer";
-import { Toaster } from "@/components/ui/toaster"
-
+import Header from "@/components/layout/header";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -17,7 +17,15 @@ const poppins = Poppins({
 
 
 export const metadata: Metadata = {
-  description: "Benk World - Personal portfolio and blog showcasing IT projects and insights.",
+  title: {
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.title}`,
+  },
+  description: siteConfig.description,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
 };
 
 export default function RootLayout({
@@ -27,10 +35,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${poppins.variable} font-sans`}>
+      <body className={`${poppins.variable} font-sans flex flex-col min-h-screen`}>
         <Providers>
-          <div  className="invisible w-full h-2 bg-primary z-50 sm:visible"></div>
-          <Navbar/>
+          <div className="invisible w-full h-2 bg-primary z-50 sm:visible"></div>
+          <Header/>
           <main className="grow flex flex-col">{children}</main>
           <Footer/>
           <Toaster/>
