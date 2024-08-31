@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import { siteConfig } from "@/config/site";
 import { Toaster } from "@/components/ui/toaster";
@@ -22,11 +22,14 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.title}`,
   },
   description: siteConfig.description,
+};
+
+export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
-};
+}
 
 export default function RootLayout({
   children,
@@ -35,13 +38,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${poppins.variable} font-sans flex flex-col min-h-screen`}>
+      <body className={`${poppins.variable} font-poppins flex flex-col min-h-screen`}>
         <Providers>
           <div className="invisible w-full h-2 bg-primary z-50 sm:visible"></div>
           <Header/>
           <main className="grow flex flex-col">{children}</main>
-          <Footer/>
           <Toaster/>
+          <Footer/>
         </Providers>
       </body>
     </html>

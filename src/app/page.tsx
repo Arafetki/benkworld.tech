@@ -1,10 +1,14 @@
+import { FlipWords } from "@/components/ui/flip-words";
+
 export default function HomePage() {
 
+  const words = ["better", "cute", "beautiful", "modern"];
+
   return (
-    <section className="py-16">
-      <div>
-        <h1>HomePage</h1>
-      </div>
-    </section>
+    <>
+      <section className="mx-auto max-w-7xl w-full px-6 lg:px-8">
+        <h1>Hero Section</h1>
+      </section>
+    </>
   );
 }
