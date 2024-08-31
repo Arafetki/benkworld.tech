@@ -5,6 +5,7 @@ export type SiteConfig = {
     title: string
     description: string
     url: string
+    emails: string[]
 }
 
 export type ContactFormData = z.infer<typeof contactFormSchema>

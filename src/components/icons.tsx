@@ -13,7 +13,8 @@ import {
     ClipboardPen, 
     CloudDownload, 
     Plus,
-    GraduationCap
+    GraduationCap,
+    Send
 } from 'lucide-react';
 
 
@@ -25,6 +26,7 @@ export const Icons = {
     moon: MoonIcon,
     monitor: Monitor,
     mail: Mail,
+    send: Send,
     eye: Eye,
     eyeOff: EyeOff,
     clipboard: Clipboard,

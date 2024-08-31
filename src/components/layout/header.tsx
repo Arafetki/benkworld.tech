@@ -24,10 +24,17 @@ export default function Header() {
     },[showMobileMenu])
 
     return (
-        <header className="w-full z-50">
+        <header className="sticky top-0 w-full z-50">
                 <nav className="h-16 mx-auto max-w-7xl flex items-center justify-between py-12 px-6 lg:px-8" aria-label="Navigation">
                     <div className="flex lg:flex-1 items-center gap-5">
-                        <Link href='/' className="text-lg sm:text-xl font-bold" onClick={()=>{if (showMobileMenu) setShowMobileMenu(false)}}>{siteConfig.title}</Link>
+                        <Link 
+                            href='/' 
+                            className="text-md sm:text-lg font-bold flex items-center gap-3" 
+                            onClick={()=>{if (showMobileMenu) setShowMobileMenu(false)}}
+                        >
+                            <Icons.logo className='w-8 h-8'/>
+                            <span className='hidden sm:flex'>{siteConfig.title}</span>
+                        </Link>
                         <ul className="hidden sm:flex gap-5" aria-label="Desktop Navigation">
                             <li><Link href='/' className="hover:opacity-60 font-normal text-sm">Home</Link></li>
                             <li><Link href='/#about' className="hover:opacity-60 font-normal text-sm">About</Link></li>
@@ -48,7 +55,7 @@ export default function Header() {
                         className="sm:hidden"
                         onClick={mobileMenuToggle}
                     >
-                        {showMobileMenu? <Icons.close/>: <Icons.burgerMenu/>}
+                        {showMobileMenu? <Icons.close className='w-6 h-6'/>: <Icons.burgerMenu className='w-6 h-6'/>}
                     </Button>
                     {showMobileMenu && (
                         <div className='fixed inset-0 z-30 top-[6.5rem] h-[calc(100vh-6.5rem)] p-6 overflow-auto bg-background/70 backdrop-blur-lg shadow-md animate-in slide-in-from-bottom-80 sm:hidden'>
