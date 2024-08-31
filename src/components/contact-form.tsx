@@ -21,7 +21,7 @@ import { useToastMessage } from '@/hooks/useToastMessage';
 
 export default function ContactForm() {
 
-    const [formState,formAction] = useFormState(SendMessage,{success: false})
+    const [formState,formAction] = useFormState(SendMessage,{success: false, error: null})
 
     const form = useForm({
         mode: 'all',

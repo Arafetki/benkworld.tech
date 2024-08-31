@@ -8,18 +8,21 @@ export function useToastMessage(formState: FormState) {
 
     useEffect(()=>{
 
-        if (formState.success) {
-            toast({
-                description: 'Message sent sucessfully!',
-            })
-        } else {
+        if (formState.error) {
             toast({
                 variant: 'destructive',
                 title: 'Uh oh! Something went wrong.',
                 description: 'There was a problem with your request.',
             })
+        } else {
+
+            if (formState.success) {
+                toast({
+                    description: 'Message sent sucessfully!',
+                })
+            }
         }
 
-    },[formState.success]);
+    },[formState,toast]);
 
 }

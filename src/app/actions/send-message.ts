@@ -9,6 +9,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export type FormState = {
   success: boolean
+  error: Error | null
 }
 
 export async function SendMessage(prevState: FormState , payload: FormData): Promise<FormState> {
@@ -17,7 +18,7 @@ export async function SendMessage(prevState: FormState , payload: FormData): Pro
     const parsed = contactFormSchema.safeParse(formData)
 
     if (!parsed.success) {
-      return {success: false}
+      return {success: false, error: new Error("Validation error")}
     }
 
     const {name,subject,message} = parsed.data
@@ -32,11 +33,12 @@ export async function SendMessage(prevState: FormState , payload: FormData): Pro
       });
 
 
-      return {success: !error}
+      return {success: !error, error: error}
 
     } catch (error) {
 
-      return {success: false}
+      if (error instanceof Error) return {success: false, error}
+      return {success: false, error: new Error("An unkown error occured")}
     }
 
 }
