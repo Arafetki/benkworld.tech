@@ -22,6 +22,7 @@
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.33.0",
     "framer-motion": "^11.3.31",
+    "jiti": "^1.21.6",
     "lucide-react": "^0.436.0",
     "next": "14.2.7",
     "next-themes": "^0.3.0",
@@ -42,7 +43,6 @@
     "drizzle-kit": "^0.24.2",
     "eslint": "^8",
     "eslint-config-next": "14.2.7",
-    "jiti": "^1.21.6",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
