@@ -1,9 +1,9 @@
-import { SiteConfig } from "@/types";
+import { SiteConfig } from "@/lib/types";
 
-export const siteConfig: SiteConfig = {
+export const siteConfig: Readonly<SiteConfig> = {
     title: "Benk TechWorld",
     description: "Personal portfolio and blog showcasing IT projects and insights.",
     url: "https://benkworld.tech/",
-    emails: ["mr.arafetk@gmail.com","arafet.benkilani@supcom.tn"]
+    emailAdresses: ["mr.arafetk@gmail.com","arafet.benkilani@supcom.tn"]
 
 }

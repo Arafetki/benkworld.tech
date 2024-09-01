@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import type { FormState } from "@/app/actions/send-message";
+import type { FormState } from "@/server/actions/send-message";
 import { ToastAction } from "@/components/ui/toast";
 
 export function useToastMessage(formState: FormState) {

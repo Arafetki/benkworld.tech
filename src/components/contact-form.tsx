@@ -3,7 +3,7 @@
 import {useForm} from 'react-hook-form';
 import { useFormState } from 'react-dom';
 import { zodResolver } from "@hookform/resolvers/zod";
-import { contactFormSchema } from "@/schemas/zod";
+import { contactFormSchema } from "@/lib/schemas/zod";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { SubmitButton } from '@/components/submit-button';
@@ -16,7 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Icons } from '@/components/icons';
-import { SendMessage } from '@/app/actions/send-message';
+import { SendMessage } from '@/server/actions/send-message';
 import { useToastMessage } from '@/hooks/useToastMessage';
 
 export default function ContactForm() {

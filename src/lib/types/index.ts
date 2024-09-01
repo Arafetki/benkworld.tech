@@ -1,11 +1,11 @@
 import {z} from 'zod';
-import { contactFormSchema } from "@/schemas/zod";
+import { contactFormSchema } from "@/lib/schemas/zod";
 
 export type SiteConfig = {
     title: string
     description: string
     url: string
-    emails: string[]
+    emailAdresses: string[]
 }
 
 export type ContactFormData = z.infer<typeof contactFormSchema>

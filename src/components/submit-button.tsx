@@ -8,7 +8,7 @@ interface SubmitButtonProps extends ButtonProps {
     label: string
     pendingLabel: string
     formIsValid: boolean
-    startContent: React.ReactNode
+    startContent?: React.ReactNode
 }
 
 export function SubmitButton({formId, label, pendingLabel, startContent, formIsValid, ...rest}: SubmitButtonProps) {

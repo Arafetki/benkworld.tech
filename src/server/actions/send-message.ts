@@ -2,10 +2,11 @@
 
 import { Resend} from 'resend';
 import { ContactEmailTemplate } from '@/components/templates/contact-email';
-import { contactFormSchema } from '@/schemas/zod';
+import { contactFormSchema } from '@/lib/schemas/zod';
 import { siteConfig } from '@/config/site';
+import { env } from "@/env";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(env.RESEND_API_KEY);
 
 export type FormState = {
   success: boolean
@@ -27,7 +28,7 @@ export async function SendMessage(prevState: FormState , payload: FormData): Pro
 
       const {error} = await resend.emails.send({
         from: 'Benk Techworld <onboarding@resend.dev>',
-        to: siteConfig.emails,
+        to: siteConfig.emailAdresses,
         subject: subject || 'Contact Me Form',
         react: ContactEmailTemplate({name: name, message: message})
       });
