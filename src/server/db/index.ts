@@ -1,14 +1,14 @@
-import { createClient, type Client } from "@libsql/client";
-import { drizzle } from "drizzle-orm/libsql";
-import { env } from "@/env";
+import  postgres  from "postgres";
+import { drizzle } from 'drizzle-orm/postgres-js';
+import { env } from "@/env.mjs";
 import * as schema from "./schema";
 
 const globalForDb = globalThis as unknown as {
-  client: Client | undefined;
+  client: ReturnType<typeof postgres> | undefined;
 };
 
 export const client =
-  globalForDb.client ?? createClient({ url: env.DATABASE_URL });
+  globalForDb.client ?? postgres(env.DATABASE_URL);
 if (process.env.NODE_ENV !== "production") globalForDb.client = client;
 
 export const db = drizzle(client, { schema });

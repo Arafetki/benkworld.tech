@@ -1,32 +1,30 @@
 {
-  "version": "6",
-  "dialect": "sqlite",
-  "id": "2a2b780e-7ed2-41a2-b24f-ed4e6c97f353",
+  "id": "cabc871d-bb3a-4524-9dbb-8c83253f30be",
   "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
   "tables": {
-    "posts": {
+    "public.posts": {
       "name": "posts",
+      "schema": "",
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
+          "type": "serial",
           "primaryKey": true,
-          "notNull": true,
-          "autoincrement": true
+          "notNull": true
         },
         "title": {
           "name": "title",
-          "type": "text(256)",
+          "type": "varchar(256)",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "author": {
           "name": "author",
-          "type": "text(256)",
+          "type": "varchar(256)",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
           "default": "'Arafet BenKilani'"
         },
         "content": {
@@ -34,47 +32,51 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
           "default": "''"
         },
         "tags": {
           "name": "tags",
-          "type": "text",
+          "type": "text[]",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false
+          "default": "'{}'::text[]"
         },
         "is_published": {
           "name": "is_published",
-          "type": "integer",
+          "type": "boolean",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
           "default": true
         },
         "created": {
           "name": "created",
-          "type": "text",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "(CURRENT_TIMESTAMP)"
+          "default": "now()"
         },
         "updated": {
           "name": "updated",
-          "type": "text",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         }
       },
       "indexes": {
         "title_idx": {
           "name": "title_idx",
           "columns": [
-            "title"
+            {
+              "expression": "title",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {},
@@ -83,12 +85,11 @@
     }
   },
   "enums": {},
+  "schemas": {},
+  "sequences": {},
   "_meta": {
+    "columns": {},
     "schemas": {},
-    "tables": {},
-    "columns": {}
-  },
-  "internal": {
-    "indexes": {}
+    "tables": {}
   }
 }
