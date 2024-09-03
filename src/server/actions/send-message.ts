@@ -4,42 +4,31 @@ import { Resend} from 'resend';
 import { ContactEmailTemplate } from '@/components/templates/contact-email';
 import { contactFormSchema } from '@/lib/schemas/zod';
 import { siteConfig } from '@/config/site';
-import { env } from "@/env.mjs";
+import { env } from '@/env.mjs';
+
+import type { ContactFormData } from '@/lib/types';
 
 const resend = new Resend(env.RESEND_API_KEY);
 
-export type FormState = {
-  success: boolean
-  error: {message: string} | null
-}
+export async function SendMessage(data: ContactFormData) {
 
-export async function SendMessage(prevState: FormState , payload: FormData): Promise<FormState> {
-
-    const formData = Object.fromEntries(payload)
-    const parsed = contactFormSchema.safeParse(formData)
-
+    const parsed = contactFormSchema.safeParse(data)
     if (!parsed.success) {
-      return {success: false, error: {message: "validation error"}}
+      return parsed.error.flatten().formErrors
     }
 
     const {name,subject,message} = parsed.data
 
-    try {
+    const {error} = await resend.emails.send({
+      from: 'Benk Techworld <onboarding@resend.dev>',
+      to: siteConfig.emailAdresses,
+      subject: subject || 'Contact me form',
+      react: ContactEmailTemplate({name: name, message: message})
+    })
 
-      const {error} = await resend.emails.send({
-        from: 'Benk Techworld <onboarding@resend.dev>',
-        to: siteConfig.emailAdresses,
-        subject: subject || 'Contact Me Form',
-        react: ContactEmailTemplate({name: name, message: message})
-      });
-
-
-      return {success: !error, error: error && {message: error.message} }
-
-    } catch (error) {
-
-      if (error instanceof Error) return {success: false, error: {message: error.message}}
-      return {success: false, error: {message: "an unkown error occured!"}}
+    if (error) {
+      throw new Error(error.message)
     }
 
+    return null
 }

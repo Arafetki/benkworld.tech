@@ -1,15 +1,15 @@
 'use client';
 
-import {useForm} from 'react-hook-form';
-import { useFormState } from 'react-dom';
+import {useForm, SubmitHandler} from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactFormSchema } from "@/lib/schemas/zod";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { SubmitButton } from '@/components/submit-button';
 import { Icons } from '@/components/icons';
 import { SendMessage } from '@/server/actions/send-message';
-import { useToastMessage } from '@/hooks/useToastMessage';
+import { Button } from '@/components/ui/button';
+import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 import {
   Form,
   FormControl,
@@ -19,13 +19,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+import type { ContactFormData } from '@/lib/types';
 
 export default function ContactForm() {
 
-    const [formState,formAction] = useFormState(SendMessage,{success: false, error: null})
-
+    const {toast} = useToast()
     const form = useForm({
-        mode: 'all',
         resolver: zodResolver(contactFormSchema),
         defaultValues: {
             name: "",
@@ -35,14 +34,37 @@ export default function ContactForm() {
         }
     })
 
-    useToastMessage(formState)
+    const onSubmit: SubmitHandler<ContactFormData> = async (data) => {
+        try {
+            const formErrors = await SendMessage(data)
+            if (formErrors) {
+                formErrors.forEach(errMsg=>{
+                    form.setError('root',{
+                        message: errMsg
+                    })
+                })
+                return
+            }
+            toast({
+                variant: 'success',
+                description: 'Message sent sucessfully!',
+            })
+        }catch (error) {
+            toast({
+                variant: 'destructive',
+                title: 'Uh oh! Something went wrong.',
+                description: 'There was a problem with your request.',
+                action: <ToastAction altText="Try again">Try again</ToastAction>
+            })
+        }
+    }
 
     return (
         <Form {...form}>
             <form
                 id="contact-form"
-                action={formAction}
-                className="max-w-2xl w-full px-6 py-8 space-y-6 rounded-lg border-2 border-border shadow-xl bg-card/5 backdrop-blur-lg"
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="max-w-2xl w-full px-6 py-8 space-y-5 rounded-lg border-2 border-border shadow-xl backdrop-blur-lg"
             >
                 <FormField
                     control={form.control}
@@ -112,13 +134,15 @@ export default function ContactForm() {
                         </FormItem>
                     )}
                 />
-                <SubmitButton 
-                    formId="contact-form"
-                    label='Send Message'
-                    pendingLabel='Sending...'
-                    formIsValid={form.formState.isValid}
-                    startContent={<Icons.send  className='w-4 h-4'/>}
-                />
+                <Button
+                    type="submit"
+                    form="contact-form"
+                    disabled={form.formState.isSubmitting}
+                    className="flex items-center gap-2"
+                >
+                    <Icons.send className='w-5 h-5'/>
+                    <span>{form.formState.isSubmitting? "Sending...": "Send Message"}</span>
+                </Button>
             </form>
         </Form>
     );

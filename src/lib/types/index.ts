@@ -8,4 +8,23 @@ export type SiteConfig = {
     emailAdresses: string[]
 }
 
+export type NavItem = {
+    name: string
+    href: string
+}
+
+export type MobileMenuContextState = {
+    isMobileMenuOpen: boolean
+    setTrue: () => void
+    setFalse: () => void
+    toggle: ()=>void    
+}
+
 export type ContactFormData = z.infer<typeof contactFormSchema>
+
+export type MobileMenuStore = {
+    isMobileMenuOpen: boolean
+    setTrue: () => void
+    setFalse: () => void
+    toggle: ()=>void
+}
