@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import { siteConfig } from "@/config/site";
 import { Toaster } from "@/components/ui/toaster";
 import { Providers } from "@/components/providers";
+import { MobileMenuProvider } from '@/contexts/mobile-context';
 import "./globals.css";
 
 import Footer from "@/components/layout/footer";
@@ -41,11 +42,14 @@ export default function RootLayout({
       <body className={`${poppins.variable} font-poppins h-screen`}>
         <div className="relative overflow-hidden">
           <Providers>
-            <div className="invisible w-full h-2 bg-primary z-50 sm:visible"></div>
-            <Header/>
-            <main>{children}</main>
-            <Toaster/>
+            <MobileMenuProvider><Header/></MobileMenuProvider>
+            <main>
+              <div className="max-w-7xl mx-auto p-6 lg:px-8">
+                {children}
+              </div>
+            </main>
             <Footer/>
+            <Toaster/>
           </Providers>
         </div>
       </body>

@@ -49,7 +49,7 @@ export default function ContactForm() {
                 variant: 'success',
                 description: 'Message sent sucessfully!',
             })
-        }catch (error) {
+        } catch (error) {
             toast({
                 variant: 'destructive',
                 title: 'Uh oh! Something went wrong.',

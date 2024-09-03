@@ -1,16 +1,18 @@
 "use client";
 
 import MainNavbar from '@/components/navigation/main-nav';
+import MobileNavMenu from '../navigation/mobile-nav';
 import { navItems } from '@/config/nav';
-import { MobileMenuProvider } from '@/contexts/mobile-context';
+import { useMobileMenu } from '@/hooks/useMobileMenu';
 
 export default function Header() {
 
+    const {isMobileMenuOpen} = useMobileMenu()
+
     return (
-        <MobileMenuProvider>
-            <header className="sticky top-0 w-full z-50">
-                    <MainNavbar items={navItems}/>
-            </header>
-        </MobileMenuProvider>
+        <header className="sticky top-0 z-50">
+                <MainNavbar items={navItems}/>
+                {isMobileMenuOpen && (<MobileNavMenu items={navItems}/>)}
+        </header>
     );
 }

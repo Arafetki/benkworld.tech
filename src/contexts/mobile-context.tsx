@@ -1,3 +1,5 @@
+'use client';
+
 import {createContext,PropsWithChildren} from 'react';
 import type { MobileMenuContextState } from '@/lib/types';
 import {useBoolean} from 'usehooks-ts';

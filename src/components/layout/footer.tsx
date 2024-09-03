@@ -1,14 +1,12 @@
 import {SocialLinks} from "@/components/social-links";
-import { ThemeSwitcher } from "@/components/theme-switcher";
 
-export default function Footer(): JSX.Element {
+export default function Footer() {
     return (
-        <footer className="border-t border-foreground-200 max-w-7xl w-full mx-auto">
-            <div className="container flex flex-col sm:flex-row items-center sm:justify-between gap-4 py-8 md:h-24 md:py-0">
-                <p className="order-2 sm:order-1 text-sm font-medium text-center">© {new Date().getFullYear()} All rights reserved.</p>
-                <div className="order-1 sm:order-2 flex flex-col-reverse items-center gap-2 sm:flex-row">
+        <footer className="border-t border-foreground-200 max-w-7xl mx-auto">
+            <div className="flex flex-col gap-4 items-center sm:flex-row sm:justify-between py-8 px-6 lg:px-8 h-24">
+                <p className="order-1 text-sm font-medium text-center">© {new Date().getFullYear()} All rights reserved.</p>
+                <div className="order-2">
                     <SocialLinks/>
-                    <ThemeSwitcher/>
                 </div>
             </div>
         </footer>
