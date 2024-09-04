@@ -6,7 +6,7 @@ import { contactFormSchema } from "@/lib/schemas/zod";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Icons } from '@/components/icons';
-import { SendMessage } from '@/server/actions/send-message';
+import { SendMessage } from '@/server/actions';
 import { Button } from '@/components/ui/button';
 import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
@@ -50,6 +50,14 @@ export default function ContactForm() {
                 description: 'Message sent sucessfully!',
             })
         } catch (error) {
+            if (error instanceof Error) {
+                return toast({
+                    variant: 'destructive',
+                    title: 'Uh oh! Something went wrong.',
+                    description: error.message,
+                    action: <ToastAction altText="Try again">Try again</ToastAction>
+                })
+            }
             toast({
                 variant: 'destructive',
                 title: 'Uh oh! Something went wrong.',
@@ -140,7 +148,7 @@ export default function ContactForm() {
                     disabled={form.formState.isSubmitting}
                     className="flex items-center gap-2"
                 >
-                    <Icons.send className='w-5 h-5'/>
+                    {form.formState.isSubmitting? <Icons.reload className='size-5 animate-spin'/>  :<Icons.send className='size-5'/>}
                     <span>{form.formState.isSubmitting? "Sending...": "Send Message"}</span>
                 </Button>
             </form>

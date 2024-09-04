@@ -12,7 +12,7 @@ export default function MobileNavMenu({items}: MobileNavMenuProps) {
     const {setFalse} = useMobileMenu()
 
     return (
-        <div className='fixed inset-0 z-50 top-24 h-[calc(100vh-6rem)] p-6 overflow-auto bg-background/70 backdrop-blur-lg shadow-md animate-in slide-in-from-bottom-80 sm:hidden'>
+        <div className='fixed inset-0 z-50 top-16 h-[calc(100vh-4rem)] p-6 overflow-auto bg-background/80 backdrop-blur-lg shadow-md animate-in slide-in-from-bottom-80 sm:hidden'>
             <ul className='flex flex-col gap-5'>
                 {
                     items.map(item=>{

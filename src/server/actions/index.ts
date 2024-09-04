@@ -8,7 +8,7 @@ import { env } from '@/env.mjs';
 
 import type { ContactFormData } from '@/lib/types';
 
-const resend = new Resend(env.RESEND_API_KEY);
+const resend = new Resend(env.RESEND_API_KEY)
 
 export async function SendMessage(data: ContactFormData) {
 
@@ -17,13 +17,13 @@ export async function SendMessage(data: ContactFormData) {
       return parsed.error.flatten().formErrors
     }
 
-    const {name,subject,message} = parsed.data
+    const {name,subject,message,email} = parsed.data
 
     const {error} = await resend.emails.send({
-      from: 'Benk Techworld <onboarding@resend.dev>',
+      from: `${name} <onboarding@resend.dev>`,
       to: siteConfig.emailAdresses,
-      subject: subject || 'Contact me form',
-      react: ContactEmailTemplate({name: name, message: message})
+      subject: `Contact Form Submission: ${subject}`,
+      react: ContactEmailTemplate({name: name,email: email, message: message})
     })
 
     if (error) {

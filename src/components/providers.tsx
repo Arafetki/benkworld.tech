@@ -1,11 +1,9 @@
 'use client';
 
-import { useRouter } from "next/navigation";
+import { PropsWithChildren } from 'react';
 import {ThemeProvider} from 'next-themes';
 
-export function Providers({children}:{children: React.ReactNode}) {
-
-    const router = useRouter()
+export function Providers({children}:PropsWithChildren) {
 
     return (
         <ThemeProvider

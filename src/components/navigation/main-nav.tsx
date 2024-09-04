@@ -28,9 +28,9 @@ export default function  MainNavbar({items}: MainNavbarProps) {
     },[isMobileMenuOpen])
 
     return (
-        <nav className="h-24 max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between">
+        <nav className="h-16 max-w-7xl mx-auto px-6 flex items-center justify-between bg-background/80 backdrop-blur-md">
             <div className="flex items-center gap-5">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                     <Link 
                         href='/' 
                         className="order-2 text-primary text-nowrap font-bold tracking-tight"

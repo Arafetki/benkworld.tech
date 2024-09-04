@@ -8,6 +8,13 @@
       "when": 1725287667964,
       "tag": "0000_powerful_blindfold",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1725483294131,
+      "tag": "0001_chunky_tomorrow_man",
+      "breakpoints": true
     }
   ]
 }
