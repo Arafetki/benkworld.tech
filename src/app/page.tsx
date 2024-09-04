@@ -8,7 +8,7 @@ export default function HomePage() {
     <>
       <section>
         <h1>Hero Section</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, cum sed quas repellendus voluptatem error.</p>
+        <p>Prod Env</p>
       </section>
     </>
   );
