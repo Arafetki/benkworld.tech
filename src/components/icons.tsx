@@ -14,7 +14,8 @@ import {
     CloudDownload, 
     Plus,
     GraduationCap,
-    Send
+    Send,
+    HardHat
 } from 'lucide-react';
 
 
@@ -35,6 +36,7 @@ export const Icons = {
     edit: ClipboardPen,
     download: CloudDownload,
     add: Plus,
+    construction:HardHat,
     file: (props: SVGProps<SVGSVGElement>) => (
         <svg 
             aria-hidden="true"

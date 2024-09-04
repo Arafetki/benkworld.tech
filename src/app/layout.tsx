@@ -1,13 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import { siteConfig } from "@/config/site";
-import { Toaster } from "@/components/ui/toaster";
+// import { Toaster } from "@/components/ui/toaster";
 import { Providers } from "@/components/providers";
-import { MobileMenuProvider } from '@/contexts/mobile-context';
+// import { MobileMenuProvider } from '@/contexts/mobile-context';
 import "./globals.css";
 
-import Footer from "@/components/layout/footer";
-import Header from "@/components/layout/header";
+// import Footer from "@/components/layout/footer";
+// import Header from "@/components/layout/header";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -42,14 +42,14 @@ export default function RootLayout({
       <body className={`${poppins.variable} font-poppins h-screen`}>
         <div className="relative overflow-hidden">
           <Providers>
-            <MobileMenuProvider><Header/></MobileMenuProvider>
+            {/* <MobileMenuProvider><Header/></MobileMenuProvider> */}
             <main>
-              <div className="max-w-7xl mx-auto p-6 lg:px-8">
+              <div className="max-w-7xl mx-auto px-6 lg:px-8">
                 {children}
               </div>
             </main>
-            <Footer/>
-            <Toaster/>
+            {/* <Footer/>
+            <Toaster/> */}
           </Providers>
         </div>
       </body>

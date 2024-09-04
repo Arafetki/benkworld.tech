@@ -1,15 +1,10 @@
-import { FlipWords } from "@/components/ui/flip-words";
+import UnderConstruction from "@/components/under-construction";
 
 export default function HomePage() {
 
-  const words = ["better", "cute", "beautiful", "modern"];
-
   return (
-    <>
-      <section>
-        <h1>Hero Section</h1>
-        <p>Prod Env</p>
-      </section>
-    </>
+    <div className="h-screen flex justify-center items-center">
+      <UnderConstruction/>
+    </div>
   );
 }
