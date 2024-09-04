@@ -7,6 +7,7 @@ export const posts = pgTable('posts',{
     author: varchar('author',{length: 256}).notNull().default('Arafet BenKilani'),
     content: text('content').notNull().default(''),
     tags: text('tags').array().notNull().default(sql`'{}'::text[]`),
+    thumbnailURL: varchar('thumbnail_url',{length: 1024}),
     isPublished: boolean('is_published').notNull().default(true),
     created: timestamp('created').notNull().defaultNow(),
     updated: timestamp('updated').$onUpdate(()=>new Date())

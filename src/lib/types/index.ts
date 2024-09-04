@@ -21,10 +21,3 @@ export type MobileMenuContextState = {
 }
 
 export type ContactFormData = z.infer<typeof contactFormSchema>
-
-export type MobileMenuStore = {
-    isMobileMenuOpen: boolean
-    setTrue: () => void
-    setFalse: () => void
-    toggle: ()=>void
-}
