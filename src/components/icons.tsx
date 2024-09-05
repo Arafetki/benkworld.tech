@@ -16,7 +16,8 @@ import {
     GraduationCap,
     Send,
     HardHat,
-    RotateCcw
+    RotateCcw,
+    Bell
 } from 'lucide-react';
 
 
@@ -39,6 +40,7 @@ export const Icons = {
     add: Plus,
     construction:HardHat,
     reload:RotateCcw,
+    bell: Bell,
     file: (props: SVGProps<SVGSVGElement>) => (
         <svg 
             aria-hidden="true"
