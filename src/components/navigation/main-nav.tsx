@@ -2,11 +2,20 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { NavItem } from "@/lib/types"
 import { Icons } from "@/components/icons";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { siteConfig } from "@/config/site";
 import { useMobileMenu } from "@/hooks/useMobileMenu";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 type MainNavbarProps = {
     items?: Readonly<NavItem[]>
@@ -15,7 +24,7 @@ type MainNavbarProps = {
 export default function  MainNavbar({items}: MainNavbarProps) {
 
     const {isMobileMenuOpen, toggle, setFalse} = useMobileMenu();
-
+    const pathname = usePathname();
 
     useEffect(()=>{
 
@@ -33,7 +42,7 @@ export default function  MainNavbar({items}: MainNavbarProps) {
                 <div className="flex items-center gap-3">
                     <Link 
                         href='/' 
-                        className="order-2 text-primary text-nowrap font-bold tracking-tight"
+                        className="order-2 text-primary font-bold tracking-tight"
                         onClick={()=>{if (isMobileMenuOpen) setFalse()}}
                     >
                         {siteConfig.title}
@@ -42,20 +51,34 @@ export default function  MainNavbar({items}: MainNavbarProps) {
                         className="sm:hidden cursor-pointer order-1"
                         onClick={toggle}
                     >
-                        {isMobileMenuOpen? <Icons.close className='size-6'/>: <Icons.burgerMenu className='size-6'/>}
+                        {isMobileMenuOpen? <Icons.close className='size-5'/>: <Icons.burgerMenu className='size-5'/>}
                     </button>
                 </div>
                 <ul className="hidden sm:flex gap-5">
                     {items?.map(item=>{
                         return (
                             <li key={item.name}>
-                                <Link href={item.href} className="text-foreground/60 hover:text-foreground text-sm">{item.name}</Link>
+                                <Link href={item.href} className={cn("text-foreground/70 hover:text-foreground font-medium text-sm", pathname===item.href && "text-foreground")}>{item.name}</Link>
                             </li>
                         );
                     })}
                 </ul>
             </div>
-            <div>
+            <div className="flex items-center">
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <Button variant='icon' size='icon' asChild>
+                                <Link href='/anouncements' onClick={()=>{if (isMobileMenuOpen) setFalse()}}>
+                                    <Icons.bell className="h-[1.2rem] w-[1.2rem]"/>
+                                </Link>
+                            </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>Anouncements</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
                 <ThemeSwitcher/>
             </div>
         </nav>

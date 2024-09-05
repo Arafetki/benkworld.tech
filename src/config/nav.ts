@@ -6,18 +6,6 @@ export const navItems: Readonly<NavItem[]> = [
         href: "/"
     },    
     {
-        name: "About",
-        href: "/#about"
-    },
-    {
-        name: "Experience",
-        href: "/#xp"
-    },
-    {
-        name: "Services",
-        href: "/#services"
-    },
-    {
         name: "Contact",
         href: "/contact"
     },
