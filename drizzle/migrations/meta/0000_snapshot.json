@@ -1,5 +1,5 @@
 {
-  "id": "cabc871d-bb3a-4524-9dbb-8c83253f30be",
+  "id": "9d082ffd-09b1-407c-9fc7-6a9757397d33",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -17,6 +17,12 @@
         "title": {
           "name": "title",
           "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar(500)",
           "primaryKey": false,
           "notNull": true
         },
@@ -40,6 +46,12 @@
           "primaryKey": false,
           "notNull": true,
           "default": "'{}'::text[]"
+        },
+        "thumbnail_url": {
+          "name": "thumbnail_url",
+          "type": "varchar(1024)",
+          "primaryKey": false,
+          "notNull": false
         },
         "is_published": {
           "name": "is_published",

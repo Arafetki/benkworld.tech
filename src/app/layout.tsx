@@ -3,13 +3,9 @@ import { Poppins } from "next/font/google";
 import { siteConfig } from "@/config/site";
 import { Toaster } from "@/components/ui/toaster";
 import { Providers } from "@/components/providers";
-import { MobileMenuProvider } from '@/contexts/mobile-context';
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./globals.css";
-
-import Footer from "@/components/layout/footer";
-import Header from "@/components/layout/header";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -43,13 +39,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.variable} font-poppins h-screen`}>
           <Providers>
-            <MobileMenuProvider><Header/></MobileMenuProvider>
-            <main>
-              <div className="max-w-7xl mx-auto px-6">
-                {children}
-              </div>
-            </main>
-            <Footer/>
+            {children}
             <Toaster/>
             <SpeedInsights/>
           </Providers>
