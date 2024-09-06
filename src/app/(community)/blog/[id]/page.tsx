@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { getPostById } from "@/server/db/data/posts";
-import {z} from "zod";
+import { idParamSchema } from "@/lib/zod";
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 import { cn } from "@/lib/utils";
@@ -16,29 +16,31 @@ type PostPageProps = {
   }
 }
 
-const idParam = z.coerce.number().gt(0,"id must be greater than zero")
-
-async function getPostFromParams(params: PostPageProps['params']) {
+const getCachedPostFromParams = cache(async (params: PostPageProps['params']) => {
 
     const {id} = params
-    const parsedId = idParam.safeParse(id)
+    const parsedId = idParamSchema.safeParse(id)
     if (!parsedId.success) {
+        console.error(parsedId.error)
         return {error: parsedId.error}
     }
     const postId = parsedId.data
 
     const {post,error} = await getPostById(postId)
     if (error) {
+        console.error(parsedId.error)
         return {error}
     }
 
-    return {post}
-}
+    return {post, error: null}
+
+},[],{revalidate: 300, tags: ["post"]})
 
 export async function generateMetadata({params}: PostPageProps): Promise<Metadata> {
 
-    const {post,error} = await getPostFromParams(params)
-    if (!post || error) {
+    const {post,error} = await getCachedPostFromParams(params)
+
+    if (!post) {
         return {}
     }
 
@@ -57,18 +59,10 @@ export async function generateMetadata({params}: PostPageProps): Promise<Metadat
 
 export default async function PostPage({params}: PostPageProps) {
 
-    const getCachedPost = cache(async () => {
+    const {post,error} = await getCachedPostFromParams(params)
 
-        return await getPostFromParams(params)
-
-    },[params.id],{revalidate: 120, tags: ["post"]})
-
-    const {post,error} = await getCachedPost()
-    if (!post) {
-        notFound()
-    }
-
-    if (error) return (<p className="text-xl text-red-500 font-medium tracking-tight">An error occured!</p>);
+    if (error) return (<p className="text-xl text-red-500 font-medium tracking-tight">An internal error occured!</p>);
+    if (!post) notFound();
 
     return (
         <article className="container relative max-w-4xl py-6 lg:py-10">

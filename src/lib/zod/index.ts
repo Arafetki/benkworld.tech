@@ -8,3 +8,5 @@ export const contactFormSchema = z.object({
 });
 
 export type ContactFormData = z.infer<typeof contactFormSchema>;
+
+export const idParamSchema = z.coerce.number().positive("ID must be greater than zero");

@@ -9,14 +9,17 @@ export const metadata: Metadata = {
 }
 
 const getCachedPosts = cache( async () =>{
-    return await getPublishedPosts()
-},['posts'],{revalidate: 60, tags: ['posts']})
+    const {posts,error} = await getPublishedPosts()
+    if (error) {
+        console.error(error)
+        return []
+    }
+    return posts
+},['posts'],{revalidate: 300, tags: ['posts']})
 
 export default async function Blog() {
 
-    const {posts,error} = await getCachedPosts()
-
-    if (error) return (<p className="text-xl text-red-500 font-medium tracking-tight">{error.message}</p>);
+    const posts = await getCachedPosts()
 
     return (
         <div className="py-6 lg:py-10">
