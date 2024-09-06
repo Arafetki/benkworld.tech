@@ -17,11 +17,11 @@ const getCachedPosts = cache( async ()=>{
     return await getPublishedPosts()
 },['posts'],{revalidate: 60, tags: ['posts']})
 
-export default async function Blog({searchParams}: PageProps) {
+export default async function Blog() {
 
     const {posts,error} = await getCachedPosts()
 
-    if (error) return (<p className="text-xl text-red-500 font-medium tracking-tight">An error occured!</p>);
+    if (error) return (<p className="text-xl text-red-500 font-medium tracking-tight">{error.message}</p>);
 
     return (
         <div className="py-6 lg:py-10">
