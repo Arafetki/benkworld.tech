@@ -8,9 +8,3 @@ export const contactFormSchema = z.object({
 });
 
 export type ContactFormData = z.infer<typeof contactFormSchema>;
-
-export const filtersSchema = z.object({
-  page: z.coerce.number().gt(0,"page must be greater than zero").lte(1000,"page must be a maximum of 1 thousand").optional(),
-  page_size: z.coerce.number().gt(0,"page_size must be greater than zero").lte(100,"page_size must be a maximum of 100").optional(),
-  sort: z.enum(["id","created","updated","-id","-created","-updated"],{invalid_type_error: "invalid sort value"}).optional(),
-});

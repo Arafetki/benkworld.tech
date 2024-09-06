@@ -1,27 +1,39 @@
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from 'next/link';
 import { getPublishedPosts } from "@/server/db/data/posts";
 import { cache, formatDate, estimateReadTimeMinutes, pluralize } from "@/utils";
 import type { SearchParams } from "@/types";
 
-
-
 type PageProps = {
     searchParams: SearchParams
 }
 
-const getPosts = cache( async ()=>{
+export const metadata: Metadata = {
+    title: `Arafet's Blog`
+}
+
+const getCachedPosts = cache( async ()=>{
     return await getPublishedPosts()
 },['posts'],{revalidate: 60, tags: ['posts']})
 
 export default async function Blog({searchParams}: PageProps) {
 
-    const {posts,error} = await getPosts()
+    const {posts,error} = await getCachedPosts()
 
     if (error) return (<p className="text-xl text-red-500 font-medium tracking-tight">An error occured!</p>);
 
     return (
-        <>
+        <div className="py-6 lg:py-10">
+            <div className="space-y-6">
+            <h1 className="inline-block font-bold font-heading text-4xl tracking-tight lg:text-5xl">
+                Arafet&apos;s Blog
+            </h1>
+            <p className="text-xl text-muted-foreground">
+                The latest IT trends, tips, and more right here!
+            </p>
+            </div>
+            <hr className="my-8" />
             {posts.length? (
                 <div className="grid gap-10 sm:grid-cols-2">
                     {posts.map((post,index)=>{
@@ -39,8 +51,9 @@ export default async function Blog({searchParams}: PageProps) {
                                     />
                                 )}
                                 <h2 className="text-2xl font-extrabold">{post.title}</h2>
+                                <p className="text-muted-foreground tracking-tight break-words leading-relaxed">{post.description}</p>
                                 <div className="flex items-center justify-between">
-                                    <p className="text-sm text-muted-foreground order-2">
+                                    <p className="text-sm text-muted-foreground">
                                         {formatDate(post.created)}
                                     </p>
                                     <p className="text-sm text-muted-foreground">{pluralize(estimateReadTimeMinutes(post.contentLength),'min')} read</p>
@@ -53,6 +66,6 @@ export default async function Blog({searchParams}: PageProps) {
                     })}
                 </div>
             ) : <p className="text-xl font-medium tracking-tight">No posts published.</p>}
-        </>
+        </div>
     );
 }

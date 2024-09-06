@@ -17,7 +17,9 @@ import {
     Send,
     HardHat,
     RotateCcw,
-    Bell
+    Bell,
+    ChevronLeft,
+    ChevronRight    
 } from 'lucide-react';
 
 
@@ -41,6 +43,8 @@ export const Icons = {
     construction:HardHat,
     reload:RotateCcw,
     bell: Bell,
+    chevronLeft: ChevronLeft,
+    chevronRight: ChevronRight,    
     file: (props: SVGProps<SVGSVGElement>) => (
         <svg 
             aria-hidden="true"
