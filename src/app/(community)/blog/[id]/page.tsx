@@ -16,7 +16,7 @@ type PostPageProps = {
   }
 }
 
-const idParam = z.coerce.number().gt(1,"id must be greater than zero")
+const idParam = z.coerce.number().gt(0,"id must be greater than zero")
 
 async function getPostFromParams(params: PostPageProps['params']) {
 
