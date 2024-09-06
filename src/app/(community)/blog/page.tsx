@@ -2,24 +2,26 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from 'next/link';
 import { getPublishedPosts } from "@/server/db/data/posts";
-import { cache, formatDate, estimateReadTimeMinutes, pluralize } from "@/utils";
+import { formatDate, estimateReadTimeMinutes, pluralize, cache } from "@/utils";
 
 export const metadata: Metadata = {
     title: `Arafet's Blog`
 }
 
-const getCachedPosts = cache( async () =>{
-    const {posts,error} = await getPublishedPosts()
-    if (error) {
-        console.error(error)
-        return []
-    }
-    return posts
-},['posts'],{revalidate: 300, tags: ['posts']})
+const getCachedPublishedPosts = cache(
+    async () => await getPublishedPosts(),
+    [],
+    {revalidate: 3600, tags: ['posts']}
+)
 
 export default async function Blog() {
 
-    const posts = await getCachedPosts()
+    const {posts,error} = await getCachedPublishedPosts()
+    
+    if (error) {
+        console.error(error)
+        return <span>Error: {error.message}</span>
+    }
 
     return (
         <div className="py-6 lg:py-10">
