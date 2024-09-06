@@ -1,10 +1,10 @@
-import type { NavItem } from "@/lib/types";
+import type { NavItem } from "@/types";
 
 export const navItems: Readonly<NavItem[]> = [
     {
-        name: "Home",
-        href: "/"
-    },    
+        name: "About",
+        href: "/about"
+    },
     {
         name: "Contact",
         href: "/contact"

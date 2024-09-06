@@ -18,7 +18,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: {
     default: siteConfig.title,
-    template: `%s | ${siteConfig.title}`,
+    template: `%s – ${siteConfig.title}`,
   },
   description: siteConfig.description,
 };
@@ -37,7 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${poppins.variable} font-poppins h-screen`}>
+      <body className={`${poppins.variable} font-poppins min-h-screen`}>
           <Providers>
             {children}
             <Toaster/>

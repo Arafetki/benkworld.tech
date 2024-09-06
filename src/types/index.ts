@@ -1,6 +1,3 @@
-import {z} from 'zod';
-import { contactFormSchema } from "@/lib/schemas/zod";
-
 export type SiteConfig = {
     title: string
     description: string
@@ -17,7 +14,7 @@ export type MobileMenuContextState = {
     isMobileMenuOpen: boolean
     setTrue: () => void
     setFalse: () => void
-    toggle: ()=>void    
+    toggle: ()=>void
 }
 
-export type ContactFormData = z.infer<typeof contactFormSchema>
+export type SearchParams = Record<string,string | string[] | undefined>

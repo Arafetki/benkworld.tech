@@ -2,7 +2,7 @@
 
 import {useForm, SubmitHandler} from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
-import { contactFormSchema } from "@/lib/schemas/zod";
+import { contactFormSchema, ContactFormData } from "@/lib/zod";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Icons } from '@/components/icons';
@@ -19,7 +19,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import type { ContactFormData } from '@/lib/types';
 
 export default function ContactForm() {
 

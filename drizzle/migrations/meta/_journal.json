@@ -8,6 +8,13 @@
       "when": 1725501606786,
       "tag": "0000_third_songbird",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1725580739734,
+      "tag": "0001_young_stellaris",
+      "breakpoints": true
     }
   ]
 }

@@ -2,11 +2,9 @@
 
 import { Resend} from 'resend';
 import { ContactEmailTemplate } from '@/components/templates/contact-email';
-import { contactFormSchema } from '@/lib/schemas/zod';
+import { contactFormSchema, ContactFormData } from '@/lib/zod';
 import { siteConfig } from '@/config/site';
 import { env } from '@/env.mjs';
-
-import type { ContactFormData } from '@/lib/types';
 
 const resend = new Resend(env.RESEND_API_KEY)
 
