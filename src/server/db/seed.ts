@@ -45,7 +45,7 @@ const SEED_DATA: (typeof posts.$inferInsert)[] = [
     {
         title: "Deploying Next.js Apps",
         description: "How to deploy your Next.js apps on Vercel",
-        author: "shadcn",
+        author: "Arafet Benkilani",
         content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, incidunt distinctio tempora et soluta fugit.",
         tags: [
             "web",
