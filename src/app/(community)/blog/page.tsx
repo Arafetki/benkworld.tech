@@ -3,23 +3,18 @@ import Image from "next/image";
 import Link from 'next/link';
 import { getPublishedPosts } from "@/server/db/data/posts";
 import { cache, formatDate, estimateReadTimeMinutes, pluralize } from "@/utils";
-import type { SearchParams } from "@/types";
-
-type PageProps = {
-    searchParams: SearchParams
-}
 
 export const metadata: Metadata = {
     title: `Arafet's Blog`
 }
 
-// const getCachedPosts = cache( async ()=>{
-//     return await getPublishedPosts()
-// },['posts'],{revalidate: 60, tags: ['posts']})
+const getCachedPosts = cache( async () =>{
+    return await getPublishedPosts()
+},['posts'],{revalidate: 60, tags: ['posts']})
 
 export default async function Blog() {
 
-    const {posts,error} = await getPublishedPosts()
+    const {posts,error} = await getCachedPosts()
 
     if (error) return (<p className="text-xl text-red-500 font-medium tracking-tight">{error.message}</p>);
 
