@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { NavItem } from "@/lib/types"
+import type { NavItem } from "@/types"
 import { Icons } from "@/components/icons";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { siteConfig } from "@/config/site";
@@ -37,12 +37,12 @@ export default function  MainNavbar({items}: MainNavbarProps) {
     },[isMobileMenuOpen])
 
     return (
-        <nav className="h-16 max-w-7xl mx-auto px-6 flex items-center justify-between bg-background/80 backdrop-blur-md">
+        <nav className="h-20 max-w-7xl mx-auto px-6 flex items-center justify-between bg-background/80 backdrop-blur-md">
             <div className="flex items-center gap-5">
                 <div className="flex items-center gap-3">
                     <Link 
                         href='/' 
-                        className="order-2 text-primary font-bold tracking-tight"
+                        className="order-2 text-primary-foreground dark:text-foreground/80 text-sm sm:text-md uppercase font-bold py-1 px-2 bg-stone-800 dark:bg-stone-600 hover:-rotate-6 transition-all ease-in-out"
                         onClick={()=>{if (isMobileMenuOpen) setFalse()}}
                     >
                         {siteConfig.title}

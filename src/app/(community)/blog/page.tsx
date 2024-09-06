@@ -1,43 +1,33 @@
-import { Metadata } from "next";
 import Image from "next/image";
 import Link from 'next/link';
-import { formatDate } from "@/lib/utils";
-import { db } from "@/server/db";
-import { unstable_cache } from 'next/cache';
+import { getPublishedPosts } from "@/server/db/data/posts";
+import { cache, formatDate, estimateReadTimeMinutes, pluralize } from "@/utils";
+import type { SearchParams } from "@/types";
 
 
-export const metadata: Metadata = {
-    title: 'Blog'
+
+type PageProps = {
+    searchParams: SearchParams
 }
 
-const getPosts = unstable_cache(
-  async () => {
-    return await db.query.posts.findMany()
-  },
-  ['posts'],
-  { revalidate: 3600, tags: ['posts'] }
-)
+const getPosts = cache( async ()=>{
+    return await getPublishedPosts()
+},['posts'],{revalidate: 60, tags: ['posts']})
 
-export default async function Blog() {
+export default async function Blog({searchParams}: PageProps) {
 
-    const posts = await getPosts()
+    const {posts,error} = await getPosts()
+
+    if (error) return (<p className="text-xl text-red-500 font-medium tracking-tight">An error occured!</p>);
 
     return (
-        <div className="py-6 lg:py-10">
-            <div className="space-y-6">
-            <h1 className="inline-block font-bold font-heading text-4xl tracking-tight lg:text-5xl">
-                Blog
-            </h1>
-            <p className="text-xl text-muted-foreground">
-                Get the latest on IT trends, tips, and more right here!
-            </p>
-            </div>
-            <hr className="my-8" />
+        <>
             {posts.length? (
-                <div className="grid gap-10 sm:grid-cols-3">
+                <div className="grid gap-10 sm:grid-cols-2">
                     {posts.map((post,index)=>{
                         return (
-                            <article key={post.id} className="group relative flex flex-col space-y-2">
+                            <article key={post.id} className="group relative flex flex-col gap-3">
+                                <h2 className="capitalize font-medium absolute p-2 rounded-sm bg-stone-400 dark:bg-stone-500 backdrop-blur-lg">{post.level}</h2>
                                 {post.thumbnailURL && (
                                     <Image
                                         src={post.thumbnailURL}
@@ -49,10 +39,12 @@ export default async function Blog() {
                                     />
                                 )}
                                 <h2 className="text-2xl font-extrabold">{post.title}</h2>
-                                <p className="text-muted-foreground">{post.description}</p>
-                                <p className="text-sm text-muted-foreground">
-                                    {formatDate(post.created as unknown as string)}
-                                </p>
+                                <div className="flex items-center justify-between">
+                                    <p className="text-sm text-muted-foreground order-2">
+                                        {formatDate(post.created)}
+                                    </p>
+                                    <p className="text-sm text-muted-foreground">{pluralize(estimateReadTimeMinutes(post.contentLength),'min')} read</p>
+                                </div>
                                 <Link href={`/blog/${post.id}`} className="absolute inset-0">
                                     <span className="sr-only">View Article</span>
                                 </Link>
@@ -61,7 +53,6 @@ export default async function Blog() {
                     })}
                 </div>
             ) : <p className="text-xl font-medium tracking-tight">No posts published.</p>}
-
-        </div>
+        </>
     );
 }
