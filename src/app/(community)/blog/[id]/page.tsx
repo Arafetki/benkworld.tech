@@ -62,8 +62,8 @@ export default async function PostPage({params}: PostPageProps) {
     const {post,error} = await getCachedPostFromParams(params)
 
     if (error) return (<p className="text-xl text-red-500 font-medium tracking-tight">An internal error occured!</p>);
-    if (!post) notFound();
 
+    if (!post) notFound();
     return (
         <article className="container relative max-w-4xl py-6 lg:py-10">
             <Link

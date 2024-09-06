@@ -12,6 +12,7 @@ export async function getPublishedPosts() {
                 contentLength: (sql<number>`length(${posts.content})`).as('content_length'),
             })
         })
+        console.log("posts queried")
         return {posts}
 
     } catch (error) {
