@@ -11,7 +11,8 @@ const nextConfig = {
         pathname: '/hello_world/images/**',
       },
     ],
-  },    
+  },
+  transpilePackages: ['next-mdx-remote'], 
 };
 
 export default nextConfig;

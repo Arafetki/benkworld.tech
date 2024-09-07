@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const getCachedPublishedPosts = cache(
     async () => await getPublishedPosts(),
     [],
-    {revalidate: 3600, tags: ['posts']}
+    {revalidate: 10, tags: ['posts']}
 )
 
 export default async function Blog() {
