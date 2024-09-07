@@ -9,6 +9,7 @@ import { Icons } from "@/components/icons"
 import { cn } from "@/lib/utils";
 import { formatDate, cache } from "@/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Mdx } from "@/components/markdown/mdx-components";
 
 type PostPageProps = {
   params: {
@@ -34,7 +35,7 @@ const getCachedPostFromParams = cache(async (params: PostPageProps['params']) =>
 
     return {post, error: null}
 
-},[],{revalidate: 300, tags: ["post"]})
+},[],{revalidate: 3600, tags: ["post"]})
 
 export async function generateMetadata({params}: PostPageProps): Promise<Metadata> {
 
@@ -104,6 +105,7 @@ export default async function PostPage({params}: PostPageProps) {
                     />
                 )}                
             </div>
+            <Mdx code={post.content}/>
             <hr className="mt-12" />
             <div className="flex justify-center py-6 lg:py-10">
                 <Link href="/blog" className={cn(buttonVariants({ variant: "ghost" }))}>
