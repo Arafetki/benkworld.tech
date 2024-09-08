@@ -19,7 +19,7 @@ const SOCIAL_LINKS = [
     },        
 ]
 
-export function SocialLinks() {
+export function SocialMedia() {
     return (
         <ul className="flex items-center gap-2">
             {SOCIAL_LINKS.map(sl=>(

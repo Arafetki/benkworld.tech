@@ -1,45 +1,30 @@
+import { allPosts } from "content-collections";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { getPostById } from "@/server/db/data/posts";
-import { idParamSchema } from "@/lib/zod";
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 import { cn } from "@/lib/utils";
-import { formatDate, cache } from "@/utils";
+import { formatDate } from "@/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Mdx } from "@/components/markdown/mdx-components";
 
 type PostPageProps = {
   params: {
-    id: string
+    slug: string
   }
 }
 
-const getCachedPostFromParams = cache(async (params: PostPageProps['params']) => {
-
-    const {id} = params
-    const parsedId = idParamSchema.safeParse(id)
-    if (!parsedId.success) {
-        console.error(parsedId.error)
-        return {error: parsedId.error}
-    }
-    const postId = parsedId.data
-
-    const {post,error} = await getPostById(postId)
-    if (error) {
-        console.error(parsedId.error)
-        return {error}
-    }
-
-    return {post, error: null}
-
-},[],{revalidate: 3600, tags: ["post"]})
+const getPostFromParams = async (params: PostPageProps['params']) => {
+    const post = allPosts.find((post)=>post.slug===params.slug)
+    if (!post) return null
+    return post
+}
 
 export async function generateMetadata({params}: PostPageProps): Promise<Metadata> {
 
-    const {post,error} = await getCachedPostFromParams(params)
+    const post = await getPostFromParams(params)
 
     if (!post) {
         return {}
@@ -47,24 +32,32 @@ export async function generateMetadata({params}: PostPageProps): Promise<Metadat
 
     return {
         title: post.title,
-        description: post.description,
-        authors: [{name: post.author}],
+        description: post.summary,
+        authors: post.authors.map((author)=>({name: author})),
         openGraph: {
             title: post.title,
-            description: post.description,
+            description: post.summary,
             type: "article",
         }
     }
 
 }
 
+
+export async function generateStaticParams(): Promise<
+  PostPageProps["params"][]
+> {
+  return allPosts.map((post) => ({
+    slug: post.slug,
+  }))
+}
+
 export default async function PostPage({params}: PostPageProps) {
 
-    const {post,error} = await getCachedPostFromParams(params)
-
-    if (error) return (<p className="text-xl text-red-500 font-medium tracking-tight">An internal error occured!</p>);
+    const post = await getPostFromParams(params)
 
     if (!post) notFound();
+
     return (
         <article className="container relative max-w-4xl py-6 lg:py-10">
             <Link
@@ -79,24 +72,32 @@ export default async function PostPage({params}: PostPageProps) {
             </Link>
             <div>
                 <time 
-                    dateTime={ post.updated? post.updated.toISOString() : post.created.toISOString()} 
+                    dateTime={post.date.toISOString()} 
                     className="block text-sm text-muted-foreground" 
                 >
-                    {post.updated? `Last update on ${formatDate(post.updated)}` : `Published on ${formatDate(post.created)}`}
+                    Published on {formatDate(post.date)}
                 </time>
                 <h1 className="mt-6 inline-block font-heading text-3xl leading-tight lg:text-5xl">
                     {post.title}
                 </h1>
-                <div className="mt-6 flex items-center gap-2">
-                    <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png" />
-                        <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
-                    <p className="text-left text-muted-foreground text-sm leading-tight font-medium italic">{post.author}</p>
-                </div>
-                {post.thumbnailURL && (
+                {post.authors.length? (
+                        <div className="mt-4 flex gap-4">
+                        {post.authors.map((author)=>{
+                            return (
+                                <div key={author} className="flex items-center gap-2">
+                                    <Avatar className="size-8">
+                                        <AvatarImage src="https://github.com/shadcn.png" />
+                                        <AvatarFallback>CN</AvatarFallback>
+                                    </Avatar>
+                                    <p className="text-left text-muted-foreground text-sm leading-tight font-medium italic">{author}</p>
+                                </div>
+                            );
+                        })}
+                        </div>
+                ): null}
+                {post.thumbnail && (
                     <Image
-                        src={post.thumbnailURL}
+                        src={post.thumbnail}
                         alt={post.title}
                         width={720}
                         height={405}
@@ -105,7 +106,7 @@ export default async function PostPage({params}: PostPageProps) {
                     />
                 )}                
             </div>
-            <Mdx code={post.content}/>
+            <Mdx code={post.mdx}/>
             <hr className="mt-12" />
             <div className="flex justify-center py-6 lg:py-10">
                 <Link href="/blog" className={cn(buttonVariants({ variant: "ghost" }))}>
