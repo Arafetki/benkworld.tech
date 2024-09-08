@@ -2,7 +2,7 @@ import { useMDXComponent } from '@content-collections/mdx/react';
 import type { MDXComponents } from 'mdx/types';
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { Callout } from "@/components/markdown/mdx-callout";
+import { Callout } from "@/components/mdx/mdx-callout";
 
 
 const components : MDXComponents = {
@@ -140,7 +140,7 @@ const components : MDXComponents = {
   code: ({ className, ...props }) => (
     <code
       className={cn(
-        "relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm",
+        "relative rounded px-[0.3rem] py-[0.2rem] font-mono text-xs sm:text-sm",
         className
       )}
       {...props}

@@ -3,12 +3,19 @@ import Image from "next/image";
 import Link from 'next/link';
 import { allPosts } from "content-collections";
 import { formatDate } from "@/utils";
+import {compareDesc} from "date-fns";
 
 export const metadata: Metadata = {
     title: `Arafet's Blog`
 }
 
 export default async function Blog() {
+
+  const posts = allPosts
+    .filter((post) => post.published)
+    .sort((a, b) => {
+      return compareDesc(new Date(a.date), new Date(b.date))
+    })    
 
     return (
         <div className="p-6 lg:py-10">
@@ -21,9 +28,9 @@ export default async function Blog() {
             </p>
             </div>
             <hr className="my-8" />
-            {allPosts.length? (
+            {posts.length? (
                 <div className="grid gap-10 sm:grid-cols-2">
-                    {allPosts.map((post,index)=>{
+                    {posts.map((post,index)=>{
                         return (
                             <article key={post.slug} className="group relative flex flex-col gap-3">
                                 <h2 className="capitalize font-medium absolute p-2 rounded-sm bg-stone-400 dark:bg-stone-500 backdrop-blur-lg">{post.level}</h2>

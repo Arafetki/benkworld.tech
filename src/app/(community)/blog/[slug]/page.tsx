@@ -8,7 +8,7 @@ import { Icons } from "@/components/icons"
 import { cn } from "@/lib/utils";
 import { formatDate } from "@/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Mdx } from "@/components/markdown/mdx-components";
+import { Mdx } from "@/components/mdx/mdx-components";
 
 type PostPageProps = {
   params: {
