@@ -1,16 +1,12 @@
 import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
-import * as dotenv from "dotenv";
-dotenv.config({ path: "./.env.local" });
 
 export const env = createEnv({
   server: {
-    DATABASE_URL: z.string().url(),
     RESEND_API_KEY: z.string().min(1),
   },
   client: {},
   runtimeEnv: {
-    DATABASE_URL: process.env.DATABASE_URL,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
   },
   emptyStringAsUndefined: true,

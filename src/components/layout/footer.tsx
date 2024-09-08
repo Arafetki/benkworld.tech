@@ -1,4 +1,4 @@
-import {SocialLinks} from "@/components/social-links";
+import {SocialMedia} from "@/components/social-media";
 
 export default function Footer() {
     return (
@@ -6,7 +6,7 @@ export default function Footer() {
             <div className="max-w-7xl mx-auto flex flex-col gap-6 items-center sm:flex-row sm:justify-between p-6 h-24">
                 <p className="order-1 font-medium">© {new Date().getFullYear()} All rights reserved.</p>
                 <div className="order-2">
-                    <SocialLinks/>
+                    <SocialMedia/>
                 </div>
             </div>
         </footer>
