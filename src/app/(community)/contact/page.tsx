@@ -8,14 +8,11 @@ export const metadata: Metadata = {
 export default function Contact() {
     return (
         <div className="flex justify-center p-6 lg:py-10">
-            <div className="inline-block space-y-10">
-                <h1 className="text-4xl font-semibold">Contact Me</h1>
-                <p 
-                    className="max-w-2xl text-sm text-muted-foreground break-words leading-relaxed"
-                >
-                    I&apos;m always interested in talking to new people or existing contacts. 
-                    If you have a question, want to provide feedback or have a business opportunity to discuss then please use the form below. 
-                    Include as much information as possible, and I&apos;ll get back to you as soon as I can.
+            <div className="inline-block space-y-5 prose dark:prose-invert">
+                <h1 className="text-4xl">Contact Me</h1>
+                <p className="max-w-3xl text-sm sm:text-base text-muted-foreground break-words tracking-tight">
+                    I always welcome the opportunity to connect with new people and stay in touch with existing contacts. 
+                    Whether you have a question, feedback, or a business opportunity to explore, feel free to reach out using the form below.
                 </p>
                 <ContactForm/>
             </div>

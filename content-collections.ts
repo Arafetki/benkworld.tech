@@ -2,7 +2,8 @@ import { defineCollection, defineConfig } from "@content-collections/core";
 import { compileMDX } from "@content-collections/mdx";
 import rehypePrettyCode from "rehype-pretty-code";
 import remarkGfm from 'remark-gfm';
-import readingTime from "reading-time";
+import  rehypeSlug from "rehype-slug";
+import rehypeAutoLinkHeadings from "rehype-autolink-headings";
 
 const posts = defineCollection({
   name: "posts",
@@ -10,17 +11,19 @@ const posts = defineCollection({
   include: "**/*.mdx",
   schema: (z) => ({
     title: z.string(),
+    topic: z.string(),
     summary: z.string(),
-    authors: z.array(z.string()),
+    author: z.string(),
     date: z.coerce.date(),
     published: z.boolean().default(true),
     thumbnail: z.string(),
-    level: z.enum(["beginner","intermediate","advanced"]).default("beginner")
   }),
   transform: async (doc,ctx) => {
     const mdx = await compileMDX(ctx,doc,{
         rehypePlugins: [
-            [rehypePrettyCode,{theme: 'dark-plus', keepBackground: false}]
+            [rehypePrettyCode,{theme: 'github-dark-high-contrast', keepBackground: false}],
+            rehypeSlug,
+            rehypeAutoLinkHeadings
         ],
         remarkPlugins: [remarkGfm]
     });
@@ -29,7 +32,6 @@ const posts = defineCollection({
         ...doc,
         mdx,
         slug: doc._meta.path,
-        readMinutes: readingTime(doc.content).text,
     }
 
   },

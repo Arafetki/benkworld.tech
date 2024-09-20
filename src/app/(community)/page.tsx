@@ -1,8 +1,10 @@
+import Hero from "@/components/hero";
+
 export default function Home() {
 
   return (
-    <div>
-      <section>Hero Section</section>
+    <div className="p-6 lg:py-10">
+      <Hero/>
     </div>
   );
 }

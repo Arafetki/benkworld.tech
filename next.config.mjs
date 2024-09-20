@@ -7,9 +7,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'static.wikia.nocookie.net',
-        port: '',
-        pathname: '/hello_world/images/**',
+        hostname: 'utfs.io',
+        pathname: '/a/ek8hyk1349/*',
       },
     ],
   },
