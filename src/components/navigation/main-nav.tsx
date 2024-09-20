@@ -10,12 +10,6 @@ import { siteConfig } from "@/config/site";
 import { useMobileMenu } from "@/hooks/useMobileMenu";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 type MainNavbarProps = {
     items?: Readonly<NavItem[]>
@@ -42,7 +36,7 @@ export default function  MainNavbar({items}: MainNavbarProps) {
                 <div className="flex items-center gap-3">
                     <Link 
                         href='/' 
-                        className="order-2 text-primary-foreground dark:text-foreground/80 text-sm sm:text-md uppercase font-bold py-1 px-2 bg-stone-800 dark:bg-stone-600 hover:-rotate-6 transition-all ease-in-out"
+                        className="order-2 text-primary-foreground text-nowrap dark:text-foreground/80 text-sm sm:text-md uppercase font-bold py-1 px-2 bg-stone-800 dark:bg-stone-600 hover:-rotate-6 transition-all ease-in-out"
                         onClick={()=>{if (isMobileMenuOpen) setFalse()}}
                     >
                         {siteConfig.title}
@@ -65,20 +59,11 @@ export default function  MainNavbar({items}: MainNavbarProps) {
                 </ul>
             </div>
             <div className="flex items-center">
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Button variant='icon' size='icon' asChild>
-                                <Link href='/anouncements' onClick={()=>{if (isMobileMenuOpen) setFalse()}}>
-                                    <Icons.bell className="h-[1.2rem] w-[1.2rem]"/>
-                                </Link>
-                            </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            <p>Anouncements</p>
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
+                <Button variant='ghost' size='icon' asChild>
+                    <Link href='/anouncements' onClick={()=>{if (isMobileMenuOpen) setFalse()}}>
+                        <Icons.bell className="h-[1.2rem] w-[1.2rem]"/>
+                    </Link>
+                </Button>
                 <ThemeSwitcher/>
             </div>
         </nav>

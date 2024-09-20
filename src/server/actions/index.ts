@@ -1,32 +1,29 @@
 'use server';
 
-import { Resend} from 'resend';
-import { ContactEmailTemplate } from '@/components/templates/contact-email';
 import { contactFormSchema, ContactFormData } from '@/lib/zod';
-import { siteConfig } from '@/config/site';
 import { env } from '@/env.mjs';
 
-const resend = new Resend(env.RESEND_API_KEY)
 
-export async function SendMessage(data: ContactFormData) {
+export async function ContactFormToEmailAction(data: ContactFormData) {
 
-    const parsed = contactFormSchema.safeParse(data)
-    if (!parsed.success) {
-      return parsed.error.flatten().formErrors
+  const parsed = contactFormSchema.parse(data)
+  const {captchaToken,...formDate} = parsed
+
+  const verifyCaptchtaResponse = await ( await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${env.RECAPTCHA_SECRET_KEY}&response=${captchaToken}`,
+    {
+      method:"POST"
     }
+  )).json()
+  if (!verifyCaptchtaResponse.success) throw new Error("reCAPTCHA verification failed.")
 
-    const {name,subject,message,email} = parsed.data
+  const formToEmailResponse = await fetch("https://www.form-to-email.com/api/s/azFrkIqvp-B3",{
+    method: "POST",
+    headers: {
+    "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formDate)
+  })
 
-    const {error} = await resend.emails.send({
-      from: `${name} <onboarding@resend.dev>`,
-      to: siteConfig.emailAdresses,
-      subject: `Contact Form Submission: ${subject}`,
-      react: ContactEmailTemplate({name: name,email: email, message: message})
-    })
+  if (!formToEmailResponse.ok) throw new Error("failed to send the email.")
 
-    if (error) {
-      throw new Error(error.message)
-    }
-
-    return null
 }

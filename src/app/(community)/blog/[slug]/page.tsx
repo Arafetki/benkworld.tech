@@ -33,7 +33,7 @@ export async function generateMetadata({params}: PostPageProps): Promise<Metadat
     return {
         title: post.title,
         description: post.summary,
-        authors: post.authors.map((author)=>({name: author})),
+        authors: [{name: post.author}],
         openGraph: {
             title: post.title,
             description: post.summary,
@@ -59,7 +59,7 @@ export default async function PostPage({params}: PostPageProps) {
     if (!post) notFound();
 
     return (
-        <article className="container relative max-w-4xl py-6 lg:py-10">
+        <article className="relative max-w-3xl mx-auto p-6 lg:py-10">
             <Link
                 href="/blog"
                 className={cn(
@@ -73,38 +73,22 @@ export default async function PostPage({params}: PostPageProps) {
             <div>
                 <time 
                     dateTime={post.date.toISOString()} 
-                    className="block text-sm text-muted-foreground" 
+                    className="block text-base sm:text-lg text-muted-foreground" 
                 >
                     Published on {formatDate(post.date)}
                 </time>
-                <h1 className="mt-6 inline-block font-heading text-3xl leading-tight lg:text-5xl">
+                <h2 className="inline-block text-sm mt-1 text-muted-foreground">@author ~ {post.author}</h2>
+                <h1 className="mt-4 inline-block font-semibold text-3xl sm:text-4xl lg:text-5xl leading-tight tracking-tight">
                     {post.title}
                 </h1>
-                {post.authors.length? (
-                        <div className="mt-4 flex gap-4">
-                        {post.authors.map((author)=>{
-                            return (
-                                <div key={author} className="flex items-center gap-2">
-                                    <Avatar className="size-8">
-                                        <AvatarImage src="https://github.com/shadcn.png" />
-                                        <AvatarFallback>CN</AvatarFallback>
-                                    </Avatar>
-                                    <p className="text-left text-muted-foreground text-sm leading-tight font-medium italic">{author}</p>
-                                </div>
-                            );
-                        })}
-                        </div>
-                ): null}
-                {post.thumbnail && (
-                    <Image
-                        src={post.thumbnail}
-                        alt={post.title}
-                        width={720}
-                        height={405}
-                        className="my-8 rounded-md border bg-muted transition-colors"
-                        priority
-                    />
-                )}                
+                <Image
+                    src={post.thumbnail}
+                    alt={post.title}
+                    width={768}
+                    height={405}
+                    className="my-8 rounded-md border bg-muted transition-colors"
+                    priority
+                />
             </div>
             <Mdx code={post.mdx}/>
             <hr className="mt-12" />

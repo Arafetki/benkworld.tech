@@ -7,6 +7,6 @@ export const metadata: Metadata = {
 
 export default function Anouncements() {
     return (
-        <div>Anouncements!</div>
+        <div className="p-6 lg:py-10">Anouncements!</div>
     );
 }

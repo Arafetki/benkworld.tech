@@ -9,14 +9,14 @@ export const metadata: Metadata = {
     title: `Arafet's Blog`
 }
 
-export default async function Blog() {
+const posts = allPosts
+.filter((post) => post.published)
+.sort((a, b) => {
+    return compareDesc(new Date(a.date), new Date(b.date))
+})   
 
-  const posts = allPosts
-    .filter((post) => post.published)
-    .sort((a, b) => {
-      return compareDesc(new Date(a.date), new Date(b.date))
-    })    
-
+export default function Blog() {
+ 
     return (
         <div className="p-6 lg:py-10">
             <div className="space-y-6">
@@ -32,8 +32,7 @@ export default async function Blog() {
                 <div className="grid gap-10 sm:grid-cols-2">
                     {posts.map((post,index)=>{
                         return (
-                            <article key={post.slug} className="group relative flex flex-col gap-3">
-                                <h2 className="capitalize font-medium absolute p-2 rounded-sm bg-stone-400 dark:bg-stone-500 backdrop-blur-lg">{post.level}</h2>
+                            <article key={post.slug} className="group flex flex-col gap-3">
                                 {post.thumbnail && (
                                     <Image
                                         src={post.thumbnail}
@@ -45,13 +44,8 @@ export default async function Blog() {
                                     />
                                 )}
                                 <h2 className="text-2xl font-extrabold">{post.title}</h2>
-                                <p className="text-muted-foreground tracking-tight break-words leading-relaxed">{post.summary}</p>
-                                <div className="flex items-center justify-between">
-                                    <p className="text-sm text-muted-foreground">
-                                        {formatDate(post.date)}
-                                    </p>
-                                    <p className="text-sm text-muted-foreground">{post.readMinutes}</p>
-                                </div>
+                                <p className="text-muted-foreground text-sm sm:text-base md:text-lg tracking-tight break-words leading-relaxed">{post.summary}</p>
+                                <p className="text-sm text-muted-foreground">{formatDate(post.date)}</p>
                                 <Link href={`/blog/${post.slug}`} className="absolute inset-0">
                                     <span className="sr-only">View Article</span>
                                 </Link>
