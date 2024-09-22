@@ -32,7 +32,7 @@ export default function Blog() {
                 <div className="grid gap-10 sm:grid-cols-2">
                     {posts.map((post,index)=>{
                         return (
-                            <article key={post.slug} className="group flex flex-col gap-3">
+                            <article key={post.slug} className="group relative flex flex-col gap-3">
                                 {post.thumbnail && (
                                     <Image
                                         src={post.thumbnail}

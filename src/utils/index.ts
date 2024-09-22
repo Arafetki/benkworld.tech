@@ -28,9 +28,9 @@ export async function retryFetch(input: string | URL | globalThis.Request, optio
       if (i === retries - 1) {
         throw error; 
       }
-      await new Promise((resolve) => setTimeout(resolve, backoff)); 
+      await wait(backoff);
       backoff *= 2; 
     }
   }
-  throw new Error("Failed to fetch after retries.");
+  throw new Error(`Failed to fetch after ${retries} retries.`);
 }

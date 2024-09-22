@@ -95,7 +95,7 @@ export default async function PostPage({params}: PostPageProps) {
                 <Icons.chevronLeft className="mr-2 h-4 w-4" />
                 See all posts
                 </Link>
-            </div>            
+            </div>
         </article>
     );
 }
