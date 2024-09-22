@@ -17,7 +17,8 @@ export async function ContactFormToEmailAction(data: ContactFormData, captchaTok
     const verifyCaptchtaResponseBody = await verifyCaptchtaResponse.json()
     if (!verifyCaptchtaResponseBody.success) throw new Error("reCAPTCHA verification failed.")
   } catch (error) {
-    throw new Error("Verify reCAPTCHA request failed")
+    if (error instanceof Error) throw new Error(error.message)
+    throw new Error("Fetch request failed")
   }
 
   try {
@@ -34,7 +35,8 @@ export async function ContactFormToEmailAction(data: ContactFormData, captchaTok
       throw new Error(`Failed to send the email. Status: ${formToEmailResponse.status}, Response: ${errorBody}`)
     }
   } catch (error) {
-    throw new Error("Form to email request failed");
+    if (error instanceof Error) throw new Error(error.message);
+    throw new Error("Fetch request failed");
   }
 
 }
