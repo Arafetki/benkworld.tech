@@ -7,7 +7,6 @@ import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 import { cn } from "@/lib/utils";
 import { formatDate } from "@/utils";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Mdx } from "@/components/mdx/mdx-components";
 
 type PostPageProps = {
@@ -42,7 +41,6 @@ export async function generateMetadata({params}: PostPageProps): Promise<Metadat
     }
 
 }
-
 
 export async function generateStaticParams(): Promise<
   PostPageProps["params"][]

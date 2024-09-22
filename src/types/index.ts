@@ -2,7 +2,13 @@ export type SiteConfig = {
     title: string
     description: string
     url: string
-    emailAdresses: string[]
+    emailAdresse: string
+    socialLinks: SocialLink[]
+}
+
+export type SocialLink = {
+    name :string
+    href: string
 }
 
 export type NavItem = {

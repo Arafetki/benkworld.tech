@@ -33,20 +33,20 @@ export default function  MainNavbar({items}: MainNavbarProps) {
     return (
         <nav className="h-20 max-w-7xl mx-auto px-6 flex items-center justify-between bg-background/80 backdrop-blur-md">
             <div className="flex items-center gap-5">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2">
+                    <button
+                        className="sm:hidden cursor-pointer"
+                        onClick={toggle}
+                    >
+                        {isMobileMenuOpen? <Icons.close strokeWidth={4} className='size-6 text-foreground'/>: <Icons.burgerMenu strokeWidth={4} className='size-6 text-foreground'/>}
+                    </button>                    
                     <Link 
                         href='/' 
-                        className="order-2 text-primary-foreground text-nowrap dark:text-foreground/80 text-sm sm:text-md uppercase font-bold py-1 px-2 bg-stone-800 dark:bg-stone-600 hover:-rotate-6 transition-all ease-in-out"
+                        className="bg-charcoal text-white text-nowrap text-[1.2rem] sm:text-[1.33rem] font-bold tracking-tight px-2 active:bg-secondary/90 hover:bg-primary/90 uppercase hover:-rotate-6 transition-all ease-in-out"
                         onClick={()=>{if (isMobileMenuOpen) setFalse()}}
                     >
                         {siteConfig.title}
                     </Link>
-                    <button
-                        className="sm:hidden cursor-pointer order-1"
-                        onClick={toggle}
-                    >
-                        {isMobileMenuOpen? <Icons.close className='size-5'/>: <Icons.burgerMenu className='size-5'/>}
-                    </button>
                 </div>
                 <ul className="hidden sm:flex gap-5">
                     {items?.map(item=>{
