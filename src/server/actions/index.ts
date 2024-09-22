@@ -2,28 +2,39 @@
 
 import { contactFormSchema, ContactFormData } from '@/lib/zod';
 import { env } from '@/env.mjs';
+import { retryFetch } from '@/utils';
 
-
-export async function ContactFormToEmailAction(data: ContactFormData) {
+export async function ContactFormToEmailAction(data: ContactFormData, captchaToken: string) {
 
   const parsed = contactFormSchema.parse(data)
-  const {captchaToken,...formDate} = parsed
 
-  const verifyCaptchtaResponse = await ( await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${env.RECAPTCHA_SECRET_KEY}&response=${captchaToken}`,
-    {
-      method:"POST"
+  try {
+    const verifyCaptchtaResponse = await retryFetch(`https://www.google.com/recaptcha/api/siteverify?secret=${env.RECAPTCHA_SECRET_KEY}&response=${captchaToken}`,
+      {
+        method:"POST",
+      }
+    )
+    const verifyCaptchtaResponseBody = await verifyCaptchtaResponse.json()
+    if (!verifyCaptchtaResponseBody.success) throw new Error("reCAPTCHA verification failed.")
+  } catch (error) {
+    throw new Error("Verify reCAPTCHA request failed")
+  }
+
+  try {
+    const formToEmailResponse = await retryFetch(`https://www.form-to-email.com/api/s/${env.FORM_TO_EMAIL_ID}`,{
+      method: "POST",
+      headers: {
+      "Content-Type": "application/json",
+      },
+      body: JSON.stringify(parsed),
+    })
+
+    if (!formToEmailResponse.ok) {
+      const errorBody = await formToEmailResponse.text()
+      throw new Error(`Failed to send the email. Status: ${formToEmailResponse.status}, Response: ${errorBody}`)
     }
-  )).json()
-  if (!verifyCaptchtaResponse.success) throw new Error("reCAPTCHA verification failed.")
-
-  const formToEmailResponse = await fetch("https://www.form-to-email.com/api/s/azFrkIqvp-B3",{
-    method: "POST",
-    headers: {
-    "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formDate)
-  })
-
-  if (!formToEmailResponse.ok) throw new Error("failed to send the email.")
+  } catch (error) {
+    throw new Error("Form to email request failed");
+  }
 
 }

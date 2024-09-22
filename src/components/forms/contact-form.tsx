@@ -34,25 +34,21 @@ export default function ContactForm() {
             email: "",
             subject: "",
             message: "",
-            captchaToken: "",
         }
     })
-
     const {toast} = useToast()
     const recaptchaRef = useRef<ReCAPTCHA2>(null);
 
-    const onCaptchaChange = useCallback((token: string | null)=>{
-        if (token) {
-            form.setValue("captchaToken",token)
+    const onValidSubmit: SubmitHandler<ContactFormData> = useCallback(async (data) => {
+        
+        const token = await recaptchaRef.current?.executeAsync()
+        if (!token) {
+            return form.setError('root',{
+                message: "reCAPTCHA verification failed. Please try again.",
+            },{shouldFocus: true})
         }
-    },[form])
-
-    const onValidSubmit: SubmitHandler<ContactFormData> = async (data) => {
-
-        const [_,error] = await safeAsync(ContactFormToEmailAction(data))
-
+        const [error] = await safeAsync(ContactFormToEmailAction(data,token))
         if (error) {
-            console.error(error)
             return toast({
                 variant: "destructive",
                 title: "Uh oh! Something went wrong.",
@@ -60,22 +56,20 @@ export default function ContactForm() {
                 action: <ToastAction altText="Try again">Try again</ToastAction>,
             })
         }
-
         toast({
             variant: "success",
             description: "Your message has been sent.",
         })
         recaptchaRef?.current?.reset();
-        form.setValue("captchaToken","")
-    }
+    },[form,toast])
 
     return (
-        <Card className='max-w-3xl w-full py-5 shadow-xl rounded-lg'>
+        <Card className='py-8 shadow-xl rounded-lg'>
             <CardContent>
                 <Form {...form}>
                     <form
                         id="contact"
-                        className="space-y-6"
+                        className="space-y-5"
                         onSubmit={form.handleSubmit(onValidSubmit)}
                     >
                         <FormField
@@ -83,12 +77,13 @@ export default function ContactForm() {
                             name="name"
                             render={({ field }) => (
                             <FormItem>
-                                <FormLabel className="text-base font-medium text-foreground">Your Name</FormLabel>
+                                <FormLabel>Your Name</FormLabel>
                                 <FormControl>
                                     <Input
                                         required
                                         placeholder="Your name"
                                         {...field}
+                                        className='rounded-xl'
                                     />
                                 </FormControl>
                                 <FormMessage />
@@ -100,13 +95,14 @@ export default function ContactForm() {
                             name="email"
                             render={({ field }) => (
                             <FormItem>
-                                <FormLabel className="text-base font-medium text-foreground">Your Email</FormLabel>
+                                <FormLabel>Your Email</FormLabel>
                                 <FormControl>
                                     <Input
                                         required
                                         type="email"
                                         placeholder="Your email"
                                         {...field}
+                                        className='rounded-xl'
                                     />
                                 </FormControl>
                                 <FormMessage />
@@ -118,11 +114,12 @@ export default function ContactForm() {
                             name="subject"
                             render={({ field }) => (
                             <FormItem>
-                                <FormLabel className="text-base font-medium text-foreground">Subject</FormLabel>
+                                <FormLabel>Subject</FormLabel>
                                 <FormControl>
                                     <Input
                                         placeholder="Subject"
                                         {...field}
+                                        className='rounded-xl'
                                     />
                                 </FormControl>
                                 <FormMessage />
@@ -134,12 +131,13 @@ export default function ContactForm() {
                             name="message"
                             render={({ field }) => (
                             <FormItem>
-                                <FormLabel className="text-base font-medium text-foreground">Your Message</FormLabel>
+                                <FormLabel>Your Message</FormLabel>
                                 <FormControl>
                                     <Textarea
-                                        rows={5}
+                                        rows={6}
                                         placeholder="Type your message here."
                                         {...field}
+                                        className='rounded-xl'
                                     />
                                 </FormControl>
                                 <FormMessage/>
@@ -147,13 +145,10 @@ export default function ContactForm() {
                             )}
                         />
                         <ReCAPTCHA
-                            size="normal"
+                            size="invisible"
                             sitekey={env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                            onChange={onCaptchaChange}
                             ref={recaptchaRef}
-                            className='transform scale-[0.8] md:scale-100 origin-top-left w-0'
                         />
-                        {form.formState.errors.captchaToken && <span className='text-xs text-red-500'>{form.formState.errors.captchaToken.message}</span> }
                     </form>
                 </Form>
             </CardContent>
