@@ -23,6 +23,8 @@ import {
     Phone,
     MapPin,
     ArrowUpRight,
+    CircleCheck,
+    CircleX
 } from 'lucide-react';
 
 export const Icons = {
@@ -50,6 +52,8 @@ export const Icons = {
     phone: Phone,
     location: MapPin,
     externLink: ArrowUpRight,
+    circleCheck: CircleCheck,
+    circleX: CircleX,
     file: (props: SVGProps<SVGSVGElement>) => (
         <svg 
             aria-hidden="true"

@@ -131,7 +131,7 @@ const components : MDXComponents = {
   pre: ({ className, ...props }) => (
     <pre
       className={cn(
-        "mb-4 mt-6 px-2 overflow-x-auto rounded-lg border bg-zinc-950 dark:bg-zinc-800 py-4",
+        "my-6 px-2 py-4 overflow-x-auto rounded-lg border bg-charcoal-950 dark:bg-charcoal-600",
         className
       )}
       {...props}

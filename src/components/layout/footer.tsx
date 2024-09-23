@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SocialMedia } from "@/components/social-media";
+import { Disclaimer } from "@/components/disclaimer";
 
 export default function Footer() {
     return (
@@ -8,7 +9,7 @@ export default function Footer() {
                 <div className="flex flex-col gap-y-1 text-center sm:text-start">
                     <p className="text-sm text-nowrap text-muted-foreground">© Copyright {new Date().getFullYear()}. Arafet BenKilani</p>
                     <p className="text-sm text-nowrap text-muted-foreground">Code snippets are <Link href="https://opensource.org/license/MIT" target="_blank" rel="noopener noreferrer" className="underline hover:text-accent-foreground">MIT licensed</Link></p>
-                    <Link href="/disclaimer" className="text-sm text-nowrap text-muted-foreground underline hover:text-accent-foreground">Disclaimer</Link>
+                    <Disclaimer/>
                 </div>
                 <SocialMedia/>
             </div>
