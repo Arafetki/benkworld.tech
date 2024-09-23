@@ -53,7 +53,7 @@ export default function ContactForm() {
     },[form,router])
 
     return (
-        <Card className='py-8 shadow-xl rounded-lg'>
+        <Card className='py-8 shadow-xl border-2 rounded-sm'>
             <CardContent>
                 <Form {...form}>
                     <form
@@ -71,8 +71,8 @@ export default function ContactForm() {
                                     <Input
                                         required
                                         placeholder="Your name"
+                                        className='rounded-lg border-muted-foreground'
                                         {...field}
-                                        className='rounded-xl'
                                     />
                                 </FormControl>
                                 <FormMessage />
@@ -90,8 +90,8 @@ export default function ContactForm() {
                                         required
                                         type="email"
                                         placeholder="Your email"
+                                        className='rounded-lg border-muted-foreground'
                                         {...field}
-                                        className='rounded-xl'
                                     />
                                 </FormControl>
                                 <FormMessage />
@@ -107,8 +107,8 @@ export default function ContactForm() {
                                 <FormControl>
                                     <Input
                                         placeholder="Subject"
+                                        className='rounded-lg border-muted-foreground'
                                         {...field}
-                                        className='rounded-xl'
                                     />
                                 </FormControl>
                                 <FormMessage />
@@ -125,8 +125,8 @@ export default function ContactForm() {
                                     <Textarea
                                         rows={6}
                                         placeholder="Type your message here."
+                                        className='rounded-lg border-muted-foreground'
                                         {...field}
-                                        className='rounded-xl'
                                     />
                                 </FormControl>
                                 <FormMessage/>
@@ -149,7 +149,7 @@ export default function ContactForm() {
                     className="w-full"
                 >
                     {form.formState.isSubmitting? (<><Icons.reload className='w-[1.1rem] h-[1.1rem] animate-spin mr-2'/> Sending...</>)
-                    :<><Icons.send className='w-[1.1rem] h-[1.1rem] mr-2'/> Send Message</>}
+                    :<><Icons.send className='size-4 mr-2'/> Send Message</>}
                 </Button>
             </CardFooter>
         </Card>
