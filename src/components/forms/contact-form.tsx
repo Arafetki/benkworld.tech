@@ -17,13 +17,11 @@ import {
 } from "@/components/ui/form";
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { safeAsync } from '@/utils';
-import { useToast } from '@/components/ui/use-toast';
-import { ToastAction } from "@/components/ui/toast";
 import ReCAPTCHA, { ReCAPTCHA as ReCAPTCHA2 } from "react-google-recaptcha";
 import { useCallback, useRef } from 'react';
 import { env } from '@/env.mjs';
 import { ContactFormToEmailAction } from '@/server/actions';
-
+import { useRouter } from 'next/navigation';
 
 export default function ContactForm() {
 
@@ -36,7 +34,7 @@ export default function ContactForm() {
             message: "",
         }
     })
-    const {toast} = useToast()
+    const router = useRouter()
     const recaptchaRef = useRef<ReCAPTCHA2>(null);
 
     const onValidSubmit: SubmitHandler<ContactFormData> = useCallback(async (data) => {
@@ -49,19 +47,10 @@ export default function ContactForm() {
         }
         const [error] = await safeAsync(ContactFormToEmailAction(data,token))
         if (error) {
-            return toast({
-                variant: "destructive",
-                title: "Uh oh! Something went wrong.",
-                description: error?.message || "There was a problem with your request.",
-                action: <ToastAction altText="Try again">Try again</ToastAction>,
-            })
+            router.push("/s/failure")
         }
-        toast({
-            variant: "success",
-            description: "Your message has been sent.",
-        })
-        recaptchaRef?.current?.reset();
-    },[form,toast])
+        router.push("/s/success")
+    },[form,router])
 
     return (
         <Card className='py-8 shadow-xl rounded-lg'>
