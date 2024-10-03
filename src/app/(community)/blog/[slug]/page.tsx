@@ -47,6 +47,7 @@ export async function generateMetadata({params}: PostPageProps): Promise<Metadat
                     alt: post.title,
                 }
             ]
+
         }
     }
 
