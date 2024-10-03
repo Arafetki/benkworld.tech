@@ -5,7 +5,7 @@ import { Icons } from "@/components/icons";
 export function SocialMedia() {
     return (
         <ul className="flex items-center gap-8">
-            {siteConfig.socialLinks.map(link=>(
+            {siteConfig.owner.socialLinks.map(link=>(
                 <li key={link.name}>
                     <Link
                         href={link.href}

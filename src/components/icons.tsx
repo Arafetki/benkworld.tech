@@ -17,7 +17,8 @@ import {
     MapPin,
     ArrowUpRight,
     CircleCheck,
-    CircleX
+    CircleX,
+    Rss
 } from 'lucide-react';
 
 export const Icons = {
@@ -41,4 +42,5 @@ export const Icons = {
     externLink: ArrowUpRight,
     circleCheck: CircleCheck,
     circleX: CircleX,
+    rss: Rss,
 }

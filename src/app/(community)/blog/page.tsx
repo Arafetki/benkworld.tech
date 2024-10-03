@@ -4,9 +4,10 @@ import Link from 'next/link';
 import { allPosts } from "content-collections";
 import { formatDate } from "@/utils";
 import {compareDesc} from "date-fns";
+import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-    title: `Arafet's Blog`
+    title: `${siteConfig.owner.firstName}'s Blog`
 }
 
 const posts = allPosts
@@ -21,7 +22,7 @@ export default function Blog() {
         <div className="p-6 lg:py-10">
             <div className="space-y-6">
             <h1 className="inline-block font-bold font-heading text-4xl tracking-tight lg:text-5xl">
-                Arafet&apos;s Blog
+                {siteConfig.owner.firstName}&apos;s Blog
             </h1>
             <p className="text-xl text-muted-foreground">
                 The latest IT trends, tips, and more right here!

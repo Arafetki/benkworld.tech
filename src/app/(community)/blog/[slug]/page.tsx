@@ -8,6 +8,10 @@ import { Icons } from "@/components/icons"
 import { cn } from "@/lib/utils";
 import { formatDate } from "@/utils";
 import { Mdx } from "@/components/mdx/mdx-components";
+import RSS from "rss";
+import {writeFileSync} from "fs";
+import { siteConfig } from "@/config/site";
+import {env} from "@/env.mjs"
 
 type PostPageProps = {
   params: {
@@ -45,9 +49,30 @@ export async function generateMetadata({params}: PostPageProps): Promise<Metadat
 export async function generateStaticParams(): Promise<
   PostPageProps["params"][]
 > {
-  return allPosts.map((post) => ({
-    slug: post.slug,
-  }))
+
+    const feed = new RSS({
+        title: `${siteConfig.owner.firstName}'s Blog | RSS Feed`,
+        description: "The latest IT trends, tips, and more right here!",
+        site_url: `${env.NEXT_PUBLIC_SITE_URL}/blog`,
+        feed_url: `${env.NEXT_PUBLIC_SITE_URL}/feed.rss`,
+        pubDate: new Date(),
+        copyright: `All rights reserved ${new Date().getFullYear()}`
+
+    });
+    allPosts.map((post) => {
+        feed.item({
+        title: post.title,
+        description: post.summary,
+        url: `${env.NEXT_PUBLIC_SITE_URL}/blog/${post.slug}`,
+        date: post.date,
+        });
+    });
+
+    writeFileSync("./public/rss.xml", feed.xml({ indent: true }));
+
+    return allPosts.map((post) => ({
+        slug: post.slug,
+    }))
 }
 
 export default async function PostPage({params}: PostPageProps) {
