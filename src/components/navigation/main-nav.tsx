@@ -59,12 +59,12 @@ export default function  MainNavbar({items}: MainNavbarProps) {
                 </ul>
             </div>
             <div className="flex items-center">
+                <ThemeSwitcher/>
                 <Button variant='ghost' size='icon' asChild>
-                    <Link href='/anouncements' onClick={()=>{if (isMobileMenuOpen) setFalse()}}>
-                        <Icons.bell className="h-[1.2rem] w-[1.2rem]"/>
+                    <Link href='/rss.xml' onClick={()=>{if (isMobileMenuOpen) setFalse()}}>
+                        <Icons.rss strokeWidth={3} className="h-[1.2rem] w-[1.2rem]"/>
                     </Link>
                 </Button>
-                <ThemeSwitcher/>
             </div>
         </nav>
     );

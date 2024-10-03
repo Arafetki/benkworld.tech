@@ -2,8 +2,12 @@ export type SiteConfig = {
     title: string
     description: string
     url: string
-    emailAdresse: string
-    socialLinks: SocialLink[]
+    owner: {
+        firstName: string
+        lastName: string
+        emailAdresse: string
+        socialLinks: SocialLink[]
+    }
 }
 
 export type SocialLink = {
