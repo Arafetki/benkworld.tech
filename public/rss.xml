@@ -2,17 +2,17 @@
     <channel>
         <title><![CDATA[Arafet's Blog | RSS Feed]]></title>
         <description><![CDATA[The latest IT trends, tips, and more right here!]]></description>
-        <link>http://localhost:3000//blog</link>
+        <link>http://localhost:3000/blog</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Thu, 03 Oct 2024 00:54:06 GMT</lastBuildDate>
-        <atom:link href="http://localhost:3000//feed.rss" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 03 Oct 2024 00:54:06 GMT</pubDate>
+        <lastBuildDate>Thu, 03 Oct 2024 01:05:06 GMT</lastBuildDate>
+        <atom:link href="http://localhost:3000/rss.xml" rel="self" type="application/rss+xml"/>
+        <pubDate>Thu, 03 Oct 2024 01:05:06 GMT</pubDate>
         <copyright><![CDATA[All rights reserved 2024]]></copyright>
         <item>
             <title><![CDATA[Server and Client Components]]></title>
             <description><![CDATA[React Server Components allow developers to build applications that span the server and client.]]></description>
-            <link>http://localhost:3000//blog/hello-world</link>
-            <guid isPermaLink="true">http://localhost:3000//blog/hello-world</guid>
+            <link>http://localhost:3000/blog/hello-world</link>
+            <guid isPermaLink="true">http://localhost:3000/blog/hello-world</guid>
             <pubDate>Mon, 02 Jan 2023 00:00:00 GMT</pubDate>
         </item>
     </channel>

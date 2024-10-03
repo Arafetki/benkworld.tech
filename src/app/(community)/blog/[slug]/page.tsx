@@ -61,7 +61,7 @@ export async function generateStaticParams(): Promise<
         title: `${siteConfig.owner.firstName}'s Blog | RSS Feed`,
         description: "The latest IT trends, tips, and more right here!",
         site_url: `${env.NEXT_PUBLIC_SITE_URL}/blog`,
-        feed_url: `${env.NEXT_PUBLIC_SITE_URL}/feed.rss`,
+        feed_url: `${env.NEXT_PUBLIC_SITE_URL}/rss.xml`,
         pubDate: new Date(),
         copyright: `All rights reserved ${new Date().getFullYear()}`
 
