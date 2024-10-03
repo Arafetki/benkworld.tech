@@ -41,6 +41,12 @@ export async function generateMetadata({params}: PostPageProps): Promise<Metadat
             title: post.title,
             description: post.summary,
             type: "article",
+            images: [
+                {
+                    url: post.thumbnail,
+                    alt: post.title,
+                }
+            ]
         }
     }
 
