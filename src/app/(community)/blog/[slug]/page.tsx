@@ -45,6 +45,8 @@ export async function generateMetadata({params}: PostPageProps): Promise<Metadat
                 {
                     url: post.thumbnail,
                     alt: post.title,
+                    width: 1200,
+                    height: 630,
                 }
             ]
 
@@ -53,9 +55,7 @@ export async function generateMetadata({params}: PostPageProps): Promise<Metadat
 
 }
 
-export async function generateStaticParams(): Promise<
-  PostPageProps["params"][]
-> {
+function generateRssFeed() {
 
     const feed = new RSS({
         title: `${siteConfig.owner.firstName}'s Blog | RSS Feed`,
@@ -76,7 +76,14 @@ export async function generateStaticParams(): Promise<
     });
 
     writeFileSync("./public/rss.xml", feed.xml({ indent: true }));
+}
 
+export async function generateStaticParams(): Promise<
+  PostPageProps["params"][]
+> {
+
+    generateRssFeed()
+    
     return allPosts.map((post) => ({
         slug: post.slug,
     }))
