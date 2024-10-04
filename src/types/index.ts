@@ -6,6 +6,8 @@ export type SiteConfig = {
         firstName: string
         lastName: string
         emailAdresse: string
+        photo: string
+        resumeUrl: string
         socialLinks: SocialLink[]
     }
 }

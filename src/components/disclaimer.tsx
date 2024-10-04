@@ -2,10 +2,8 @@
 
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -14,13 +12,10 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogClose
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { useMediaQuery } from "usehooks-ts";
 
 export function Disclaimer() {
@@ -41,13 +36,6 @@ export function Disclaimer() {
                         The author strives to ensure the accuracy and reliability of the information provided but makes no guarantees regarding its completeness, suitability, or availability. Use of this information is at your own risk, and the author is not liable for any decisions or actions taken based on it, nor for any consequential or special damages, even if warned of potential risks.
                     </DialogDescription>
                 </DialogHeader>
-                <DialogFooter>
-                    <DialogClose asChild>
-                        <Button type="button">
-                            Continue
-                        </Button>
-                    </DialogClose>
-                </DialogFooter>
             </DialogContent>
         </Dialog>
     );
@@ -64,11 +52,6 @@ export function Disclaimer() {
                         <br/>
                         The author strives to ensure the accuracy and reliability of the information provided but makes no guarantees regarding its completeness, suitability, or availability. Use of this information is at your own risk, and the author is not liable for any decisions or actions taken based on it, nor for any consequential or special damages, even if warned of potential risks.                    </DrawerDescription>
                 </DrawerHeader>
-                <DrawerFooter>
-                    <DrawerClose>
-                        <Button type="button">Continue</Button>
-                    </DrawerClose>
-                </DrawerFooter>
             </DrawerContent>
         </Drawer>
     );

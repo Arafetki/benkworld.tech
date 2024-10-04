@@ -4,9 +4,9 @@
         <description><![CDATA[The latest IT trends, tips, and more right here!]]></description>
         <link>http://localhost:3000/blog</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Thu, 03 Oct 2024 01:36:30 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 04 Oct 2024 01:50:51 GMT</lastBuildDate>
         <atom:link href="http://localhost:3000/rss.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 03 Oct 2024 01:36:30 GMT</pubDate>
+        <pubDate>Fri, 04 Oct 2024 01:50:51 GMT</pubDate>
         <copyright><![CDATA[All rights reserved 2024]]></copyright>
         <item>
             <title><![CDATA[Server and Client Components]]></title>

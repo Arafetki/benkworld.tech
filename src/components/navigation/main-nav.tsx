@@ -42,7 +42,7 @@ export default function  MainNavbar({items}: MainNavbarProps) {
                     </button>                    
                     <Link 
                         href='/' 
-                        className="bg-charcoal dark:bg-charcoal-100 text-white text-nowrap text-[1.15rem] sm:text-[1.25rem] font-bold tracking-tight px-2 active:bg-secondary/90 hover:bg-primary/90 dark:hover:bg-primary/90 dark:active:bg-secondary/90 uppercase hover:-rotate-6 transition-all ease-in-out"
+                        className="bg-charcoal text-white text-nowrap text-base sm:text-lg font-bold uppercase tracking-tight px-2 py-1 active:bg-secondary/90 hover:bg-primary hover:-rotate-6 transition-all ease-in-out"
                         onClick={()=>{if (isMobileMenuOpen) setFalse()}}
                     >
                         {siteConfig.title}
