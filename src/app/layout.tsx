@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.variable} font-poppins antialiased min-h-screen relative`}>
-        <div className="absolute inset-0 min-h-screen bg-fixed opacity-10" style={{backgroundImage: `url(${grainImage.src})`}}/>
+        <div className="absolute inset-0 min-h-screen bg-fixed opacity-10 pointer-events-none" style={{backgroundImage: `url(${grainImage.src})`}}/>
         <Providers>
           {children}
           <Toaster/>
