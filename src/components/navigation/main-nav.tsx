@@ -31,7 +31,7 @@ export default function  MainNavbar({items}: MainNavbarProps) {
     },[isMobileMenuOpen])
 
     return (
-        <nav className="h-20 max-w-7xl mx-auto px-6 flex items-center justify-between bg-background/80 backdrop-blur-md">
+        <nav className="h-20 max-w-7xl mx-auto px-6 flex items-center justify-between">
             <div className="flex items-center gap-5">
                 <div className="flex items-center gap-2">
                     <button
