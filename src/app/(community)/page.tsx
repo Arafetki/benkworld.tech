@@ -6,8 +6,6 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Icons } from "@/components/icons";
 import { FlipWords } from "@/components/ui/flip-words";
-import { StarsBackground } from "@/components/ui/stars-background";
-import { ShootingStars } from "@/components/ui/shooting-stars";
 
 const words = ['Cloud Computing', 'DevSecOps', 'Software Development'];
 
@@ -41,8 +39,6 @@ export default function Home() {
             </Button>
           </div>
         </div>
-        <ShootingStars />
-        <StarsBackground />
       </section>
     </div>
   );
