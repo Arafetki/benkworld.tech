@@ -6,6 +6,10 @@ export function formatDate(date: Date): string {
   })
 }
 
+export function formatName(firstName: string, lastName: string) {
+  return `${firstName} ${lastName}`
+}
+
 export function wait(ms: number) {
   return new Promise((resolve)=>setTimeout(resolve,ms))
 }
@@ -19,18 +23,5 @@ export async function safeAsync<T,E=Error> (promise :Promise<T>): Promise<[null,
   }
 }
 
-export async function retryFetch(input: string | URL | globalThis.Request, options?: RequestInit, retries = 3, backoff = 1000): Promise<Response> {
-  for (let i = 0; i < retries; i++) {
-    try {
-      const response = await fetch(input, options);
-      return response
-    } catch (error) {
-      if (i === retries - 1) {
-        throw error; 
-      }
-      await wait(backoff);
-      backoff *= 2; 
-    }
-  }
-  throw new Error(`Failed to fetch after ${retries} retries.`);
-}
+
+
