@@ -28,7 +28,7 @@ export default function Home() {
               className="rounded-full aspect-square object-cover border-2 border-primary"
             />
           </div>
-          <div className="text-center flex flex-col items-center gap-2">
+          <div className="text-center flex flex-col items-center gap-3">
             <h1 className="font-bold text-lg sm:text-xl uppercase">{siteConfig.owner.firstName} <span className="block md:inline-block">{siteConfig.owner.lastName}</span></h1>
             <h2 className="font-extrabold text-xl sm:text-2xl md:text-4xl uppercase">Cloud DevSecOps <span className="text-primary">Engineer</span></h2>
             <div className="text-base text-muted-foreground text-pretty max-w-[50ch] leading-relaxed">
@@ -36,11 +36,11 @@ export default function Home() {
               <FlipWords words={words} className="font-medium"/> <br />
               <p>I&apos;m dedicated to continuous learning to enhance my expertise.</p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-1 sm:gap-2">
-              <Button asChild className="rounded-lg">
+            <div className="flex gap-2">
+              <Button asChild className="rounded-lg" size="sm">
                 <Link href={siteConfig.owner.resumeUrl} target="blank">Resume <Icons.externLink strokeWidth={2} className="ml-2 h-4 w-4"/></Link>
               </Button>
-              <Button asChild className="rounded-lg">
+              <Button asChild className="rounded-lg" size="sm">
                 <Link href={`mailto:${siteConfig.owner.emailAdresse}`}><Icons.mail strokeWidth={2} className="mr-2 h-4 w-4"/> Get In Touch</Link>
               </Button>
             </div>            
