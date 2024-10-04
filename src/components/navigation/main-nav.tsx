@@ -31,8 +31,8 @@ export default function  MainNavbar({items}: MainNavbarProps) {
     },[isMobileMenuOpen])
 
     return (
-        <nav className="h-20 max-w-7xl mx-auto px-6 flex items-center justify-between">
-            <div className="flex items-center gap-5">
+        <nav className="h-20 max-w-7xl mx-auto px-6 rounded-2xl flex items-center justify-between">
+            <div className="flex items-center gap-5 z-50">
                 <div className="flex items-center gap-2">
                     <button
                         className="sm:hidden cursor-pointer"
@@ -58,7 +58,7 @@ export default function  MainNavbar({items}: MainNavbarProps) {
                     })}
                 </ul>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center z-50">
                 <ThemeSwitcher/>
                 <Button variant='ghost' size='icon' asChild>
                     <Link href='/rss.xml' onClick={()=>{if (isMobileMenuOpen) setFalse()}}>
