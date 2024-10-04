@@ -18,7 +18,9 @@ import {
     ArrowUpRight,
     CircleCheck,
     CircleX,
-    Rss
+    Rss,
+    MoveDown,
+    ChevronDown
 } from 'lucide-react';
 
 export const Icons = {
@@ -43,4 +45,6 @@ export const Icons = {
     circleCheck: CircleCheck,
     circleX: CircleX,
     rss: Rss,
+    arrowDown: MoveDown,
+    chevronDown: ChevronDown,
 }

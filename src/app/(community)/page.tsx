@@ -6,39 +6,54 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Icons } from "@/components/icons";
 import { FlipWords } from "@/components/ui/flip-words";
-
-const words = ['Cloud Computing', 'DevSecOps', 'Software Development'];
+import { useMemo } from "react";
+import { BackgroundLines } from "@/components/ui/background-lines";
 
 export default function Home() {
 
+  const words = useMemo(()=>['Cloud Computing', 'DevSecOps', 'Software Development'],[]) 
+
   return (
-    <div className="relative flex flex-col px-6">
-      <section className="relative flex flex-col items-center gap-6 py-12 lg:py-20">
-        <Image
-          src={siteConfig.owner.photo}
-          alt="Me"
-          height={125}
-          width={125}
-          priority
-          className="rounded-full aspect-square object-cover hover:scale-110 sm:hover:scale-125 transition-all ease-in-out"
-        />
-        <div className="text-center space-y-4 flex flex-col items-center">
-          <h1 className="font-extrabold text-xl sm:text-2xl uppercase">{siteConfig.owner.firstName}<br/>{siteConfig.owner.lastName}</h1>
-          <h2 className="font-bold text-xl sm:text-3xl lg:text-4xl uppercase">Cloud DevSecOps <span className="text-primary">Engineer</span></h2>
-          <div className="text-sm md:text-base text-muted-foreground text-pretty max-w-[50ch] leading-relaxed">
-            <span className="block sm:inline-block">I&apos;m passionate about,</span>
-            <FlipWords words={words} className="text-base font-medium sm:text-lg md:text-xl"/> <br />
-            constantly pushing boundaries to build innovative, secure, and future-ready solutions.
+    <div className="max-w-7xl w-full mx-auto px-6 flex flex-col">
+      <section id="hero" className="relative py-10">
+        <BackgroundLines className="flex flex-col items-center justify-center gap-8">
+          <div className="relative flex justify-center items-center">
+            <div className="absolute size-32 rounded-full shadow-[0_10px_15px_#3182ce] animate-spin"/>
+            <Image
+              src={siteConfig.owner.photo}
+              alt="Me"
+              height={132}
+              width={132}
+              priority
+              className="rounded-full aspect-square object-cover border-2 border-primary"
+            />
           </div>
-          <div className="flex items-center justify-center gap-4 py-2">
-            <Button asChild>
-              <Link href={siteConfig.owner.resumeUrl} target="blank">Resume <Icons.externLink strokeWidth={2} className="ml-2 h-4 w-4"/></Link>
-            </Button>
-            <Button asChild>
-              <Link href={`mailto:${siteConfig.owner.emailAdresse}`}>Get In Touch <Icons.mail strokeWidth={2} className="ml-2 h-4 w-4"/></Link>
-            </Button>
+          <div className="text-center flex flex-col items-center gap-3">
+            <h1 className="font-bold text-lg sm:text-xl uppercase">{siteConfig.owner.firstName} <span className="block md:inline-block">{siteConfig.owner.lastName}</span></h1>
+            <h2 className="font-extrabold text-xl sm:text-2xl md:text-4xl uppercase">Cloud DevSecOps <span className="text-primary">Engineer</span></h2>
+            <div className="text-base text-muted-foreground text-pretty max-w-[50ch] leading-relaxed">
+              <span className="block sm:inline-block">I&apos;m passionate about,</span>
+              <FlipWords words={words} className="font-medium"/> <br />
+              <p>I&apos;m dedicated to continuous learning to enhance my expertise.</p>
+            </div>
+            <div className="flex items-center justify-center gap-4 py-2">
+              <Button asChild className="rounded-lg">
+                <Link href={siteConfig.owner.resumeUrl} target="blank">Resume <Icons.externLink strokeWidth={2} className="ml-2 h-4 w-4"/></Link>
+              </Button>
+              <Button asChild className="rounded-lg">
+                <Link href={`mailto:${siteConfig.owner.emailAdresse}`}><Icons.mail strokeWidth={2} className="mr-2 h-4 w-4"/> Get In Touch</Link>
+              </Button>
+            </div>
           </div>
-        </div>
+          <div className="flex items-center">
+            <div className="w-[20px] h-[45px] bg-transparent border-[3px] border-foreground rounded-full relative">
+              <div className="absolute size-2 m-auto rounded-full inset-0 bg-foreground animate-scrollDown"/>
+            </div>
+          </div>
+        </BackgroundLines>
+      </section>
+      <section>
+
       </section>
     </div>
   );
