@@ -4,6 +4,7 @@ import { siteConfig } from "@/config/site";
 import { Toaster } from "@/components/ui/toaster";
 import { Providers } from "@/components/providers";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import grainImage from "@/assets/grain.jpg";
 
 import "./globals.css";
 
@@ -37,12 +38,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${poppins.variable} font-poppins min-h-screen antialiased`}>
-          <Providers>
-            {children}
-            <Toaster/>
-            <SpeedInsights/>
-          </Providers>
+      <body className={`${poppins.variable} font-poppins antialiased min-h-screen relative`}>
+        <div className="absolute inset-0 min-h-screen bg-fixed opacity-10" style={{backgroundImage: `url(${grainImage.src})`}}/>
+        <Providers>
+          {children}
+          <Toaster/>
+          <SpeedInsights/>
+        </Providers>
       </body>
     </html>
   );
