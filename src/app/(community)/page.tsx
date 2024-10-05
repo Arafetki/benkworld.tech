@@ -33,7 +33,7 @@ export default function Home() {
               <p className="font-medium text-sm sm:text-base text-muted-foreground mx-auto leading-relaxed">
                 Hi, I&apos;m <span className="text-foreground">{`${siteConfig.owner.firstName} ${siteConfig.owner.lastName}`}</span>,
                 a <span className="text-primary">Cloud DevSecOps Engineer</span> living near Nabeul, Tunisia <Icons.tunisianFlag className="inline-block size-4 mx-1"/>
-                My main focus is on <span className="text-foreground">Cloud, Security, DevOps</span> and other emerging technical areas. If I can help you in any way, please contact me. I'd be happy to hear from you.
+                My main focus is on <span className="text-foreground">Cloud, Security, DevOps</span> and other emerging technical areas. If I can help you in any way, please contact me. I&apos;d be happy to hear from you.
               </p>
             </div>
             <div className="flex justify-center gap-4">
@@ -53,6 +53,9 @@ export default function Home() {
             </div>
           </div>
       </BackgroundLines>
+      <section>
+
+      </section>
     </div>
   );
 }
