@@ -96,7 +96,7 @@ export default async function PostPage({params}: PostPageProps) {
     if (!post) notFound();
 
     return (
-        <article className="relative max-w-3xl mx-auto p-6 lg:py-10">
+        <article className="relative max-w-3xl mx-auto">
             <Link
                 href="/blog"
                 className={cn(

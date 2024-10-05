@@ -10,7 +10,7 @@ export default function Header() {
     const {isMobileMenuOpen} = useMobileMenu()
 
     return (
-        <header className="sticky top-0 z-50">
+        <header>
                 <MainNavbar items={navItems}/>
                 {isMobileMenuOpen && (<MobileNavMenu items={navItems}/>)}
         </header>
