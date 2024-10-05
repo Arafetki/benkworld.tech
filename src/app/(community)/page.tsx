@@ -7,8 +7,6 @@ import { BackgroundLines } from "@/components/ui/background-lines";
 
 export default function Home() {
 
-  const words = useMemo(()=>['Cloud Computing', 'DevSecOps', 'Software Development'],[]) 
-
   return (
     <div className="relative">
       <BackgroundLines className="flex flex-col items-center gap-y-8 py-8 lg:py-12">
