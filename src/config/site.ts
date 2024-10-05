@@ -9,7 +9,7 @@ export const siteConfig: Readonly<SiteConfig> = {
         lastName: "Ben Kilani",
         emailAdresse: "mr.arafetk@gmail.com",
         photo:"/me.jpg",
-        resumeUrl: "https://utfs.io/a/ek8hyk1349/mJiezb2UwDPc4Z3HIrbIu9jZhX3HsCPie8rxOa67q2BJoRVQ",
+        resumeUrl: "https://utfs.io/f/mJiezb2UwDPc5BIr7hani9kclsWJHSGbvBEjNeUm0Ix73M8Y",
         socialLinks: [
             {
                 name: "GitHub",

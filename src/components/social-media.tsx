@@ -1,10 +1,15 @@
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
 import { Icons } from "@/components/icons";
+import { cn } from "@/lib/utils";
 
-export function SocialMedia() {
+type SocialMediaProps = {
+    className?: string
+}
+
+export function SocialMedia({className}: SocialMediaProps) {
     return (
-        <ul className="flex items-center gap-8">
+        <ul className={cn("flex items-center",className)}>
             {siteConfig.owner.socialLinks.map(link=>(
                 <li key={link.name}>
                     <Link

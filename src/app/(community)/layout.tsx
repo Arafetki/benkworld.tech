@@ -6,7 +6,7 @@ export default function Layout({children}: Readonly<{children: React.ReactNode}>
     return (
         <main className='flex flex-col min-h-screen'>
             <MobileMenuProvider><Header/></MobileMenuProvider>
-            <div className="flex-1 flex flex-col">
+            <div className="grow max-w-7xl w-full mx-auto px-6">
                 {children}
             </div>
             <Footer/>

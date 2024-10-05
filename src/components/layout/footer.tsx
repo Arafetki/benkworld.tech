@@ -12,7 +12,7 @@ export default function Footer() {
                     <p className="text-sm text-nowrap text-muted-foreground">Code snippets are <Link href="https://opensource.org/license/MIT" target="_blank" rel="noopener noreferrer" className="underline hover:text-accent-foreground">MIT licensed</Link></p>
                     <Disclaimer/>
                 </div>
-                <SocialMedia/>
+                <SocialMedia className="gap-7"/>
             </div>
         </footer>
     );
