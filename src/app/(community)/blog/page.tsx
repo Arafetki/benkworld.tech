@@ -19,7 +19,7 @@ const posts = allPosts
 export default function Blog() {
  
     return (
-        <div>
+        <div className="py-6 lg:py-10">
             <div className="space-y-6">
             <h1 className="inline-block font-bold font-heading text-4xl tracking-tight lg:text-5xl">
                 {siteConfig.owner.firstName}&apos;s Blog

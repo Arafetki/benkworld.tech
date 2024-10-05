@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${rubik.variable} font-rubik antialiased min-h-screen relative`}>
-        <div className="absolute inset-0 opacity-5 pointer-events-none" style={{backgroundImage: `url(${grainImage.src})`}}/>
+        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{backgroundImage: `url(${grainImage.src})`}}/>
         <Providers>
           {children}
           <Toaster/>
