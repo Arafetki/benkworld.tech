@@ -32,7 +32,7 @@ export default function Home() {
               <h1 className="font-bold text-pretty text-2xl sm:text-3xl md:text-4xl">Driven by curiosity, focused on innovation.</h1>
               <p className="font-medium text-sm sm:text-base text-muted-foreground mx-auto leading-relaxed">
                 Hi, I&apos;m <span className="text-foreground">{`${siteConfig.owner.firstName} ${siteConfig.owner.lastName}`}</span>,
-                a <span className="text-primary">Cloud DevSecOps Engineer</span> living near Nabeul, Tunisia <Icons.tunisianFlag className="inline-block size-4 mx-1"/>
+                a <span className="text-foreground">Cloud DevSecOps Engineer</span> living near Nabeul, Tunisia <Icons.tunisianFlag className="inline-block size-4 mx-1"/>
                 My main focus is on <span className="text-foreground">Cloud, Security, DevOps</span> and other emerging technical areas. If I can help you in any way, please contact me. I&apos;d be happy to hear from you.
               </p>
             </div>
