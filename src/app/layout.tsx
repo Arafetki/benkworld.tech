@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Rubik } from "next/font/google";
 import { siteConfig } from "@/config/site";
-import { Toaster } from "@/components/ui/toaster";
 import { Providers } from "@/components/providers";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import grainImage from "@/assets/grain.jpg";
@@ -42,7 +41,6 @@ export default function RootLayout({
         <div className="absolute inset-0 opacity-10 pointer-events-none" style={{backgroundImage: `url(${grainImage.src})`}}/>
         <Providers>
           {children}
-          <Toaster/>
           <SpeedInsights/>
         </Providers>
       </body>
