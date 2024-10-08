@@ -6,10 +6,6 @@ export function formatDate(date: Date): string {
   })
 }
 
-export function formatName(firstName: string, lastName: string) {
-  return `${firstName} ${lastName}`
-}
-
 export function wait(ms: number) {
   return new Promise((resolve)=>setTimeout(resolve,ms))
 }
