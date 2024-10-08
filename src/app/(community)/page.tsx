@@ -28,13 +28,9 @@ export default function Home() {
             </div>
           </div>
           <div className="space-y-10">
-            <div className="max-w-xl text-center italic space-y-8">
-              <h1 className="font-bold text-pretty text-2xl sm:text-3xl md:text-4xl">Driven by curiosity, focused on innovation.</h1>
-              <p className="font-medium text-sm sm:text-base text-muted-foreground mx-auto leading-relaxed">
-                Hi, I&apos;m <span className="text-foreground">{`${siteConfig.owner.firstName} ${siteConfig.owner.lastName}`}</span>,
-                a <span className="text-foreground">Cloud DevSecOps Engineer</span> living near Nabeul, Tunisia <Icons.tunisianFlag className="inline-block size-4 mx-1"/>
-                My main focus is on <span className="text-foreground">Cloud, Security, DevOps</span> and other emerging technical areas. If I can help you in any way, please contact me. I&apos;d be happy to hear from you.
-              </p>
+            <div className="max-w-xl text-center italic space-y-2">
+              <h2 className="font-medium text-muted-foreground sm:text-lg md:text-xl lg:text-2xl">Cloud DevSecOps Engineer</h2>
+              <h1 className="font-bold text-center italic text-pretty text-2xl sm:text-3xl md:text-4xl">Driven by curiosity, focused on innovation.</h1>
             </div>
             <div className="flex justify-center gap-4">
               <Button
