@@ -3,43 +3,53 @@ import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { Spotlight } from "@/components/ui/spotlight";
 import { siteConfig } from "@/config/site";
 import { Icons } from "./icons";
+import Link from "next/link";
+import MagicButton from "./magic-button";
 
 export default function Hero() {
     return (
         <section>
-            <div>
-                <Spotlight
-                    className="md:left-60 -top-20 hidden dark:flex"
-                    fill="white"
-                />
-                <Spotlight
-                    className="md:left-60 -top-20 dark:hidden"
-                    fill="black"
-                />                
-            </div>            
-            <div className="flex justify-center relative my-20">
+            <Spotlight
+                className="md:left-60 -top-20 hidden dark:flex"
+                fill="white"
+            />
+            <Spotlight
+                className="md:left-60 -top-20 dark:hidden"
+                fill="#0a0a0a"
+            />
+            <div className="flex justify-center relative my-8">
                 <div className="max-w-[89vw] md:max-w-2xl lg:max-w-3xl flex flex-col items-center justify-center">
                     <div className="flex flex-col items-center gap-y-6">
-                        <Image
-                            src={siteConfig.owner.photo}
-                            alt="Me"
-                            height={85}
-                            width={85}
-                            priority
-                            className="rounded-full aspect-square object-cover border-[3px] border-blue-400"
-                        />
-                        <div className="flex gap-2 items-center">
-                            <div className="bg-green-600 rounded-full size-2"/>
-                            <span className="uppercase text-xs font-medium">Available for Work</span>
+                        <div className="relative inline-flex overflow-hidden rounded-full p-[3px] focus:outline-none">
+                            <span className="absolute inset-0 -z-10 animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+                            <Image
+                                src={siteConfig.owner.photo}
+                                alt="Me"
+                                height={90}
+                                width={90}
+                                priority
+                                className="aspect-square rounded-full object-cover"
+                            />
+                        </div>
+                        <div className="flex gap-1 items-center">
+                            <div className="bg-green-600 rounded-full size-[10px]"/>
+                            <span className="uppercase text-xs text-muted-foreground font-medium">Available for Work</span>
                         </div>
                     </div>
                     <TextGenerateEffect
                         words="Driven by curiosity, focused on innovation."
-                        className="text-center text-2xl sm:text-3xl md:text-5xl lg:text-6xl"
+                        className="text-center italic text-2xl sm:text-3xl md:text-5xl lg:text-6xl"
                     />
-                    <p className="font-medium text-center text-pretty text-muted-foreground md:tracking-wider mb-4 md:text-lg lg:text-xl">
-                        Hi, I&apos;m {siteConfig.owner.firstName}, a Cloud DevSecOps Engineer based in Tunisia <Icons.tunisianFlag className="inline-block size-3 sm:size-4"/>
+                    <p className="text-center text-pretty italic text-muted-foreground md:tracking-wider mb-4 md:text-lg lg:text-xl">
+                        Hi, I&apos;m {siteConfig.owner.firstName}, a Cloud DevSecOps Engineer based in Tunisia <Icons.tunisianFlag className="inline-block ml-[1px] mb-1 size-4 sm:size-5"/>
                     </p>
+                    <Link href={siteConfig.owner.resumeUrl} target="_blank">
+                        <MagicButton
+                            title="MY RESUME"
+                            icon={<Icons.externLink className="size-5"/>}
+                            position="right"
+                        />
+                    </Link>
                 </div>
             </div>
         </section>
