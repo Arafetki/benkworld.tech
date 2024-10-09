@@ -17,7 +17,7 @@ export function SocialMedia({className}: SocialMediaProps) {
                         rel="noopener noreferrer"
                         target="_blank"
                         aria-label={link.name}
-                        className="text-primary hover:underline flex items-center gap-x-1"
+                        className="text-blue-500 hover:underline flex items-center gap-x-1"
                     >
                         {link.name}
                         <Icons.externLink className="size-5"/>

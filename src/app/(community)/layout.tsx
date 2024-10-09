@@ -4,9 +4,9 @@ import Footer from '@/components/layout/footer';
 
 export default function Layout({children}: Readonly<{children: React.ReactNode}>) {
     return (
-        <main className='flex flex-col min-h-screen'>
+        <main className='relative overflow-hidden flex flex-col min-h-screen'>
             <MobileMenuProvider><Header/></MobileMenuProvider>
-            <div className="grow max-w-7xl w-full mx-auto px-6">
+            <div className="grow max-w-7xl w-full mx-auto">
                 {children}
             </div>
             <Footer/>
