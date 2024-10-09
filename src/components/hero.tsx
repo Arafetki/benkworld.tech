@@ -19,22 +19,16 @@ export default function Hero() {
             />
             <div className="flex justify-center relative my-8">
                 <div className="max-w-[89vw] md:max-w-2xl lg:max-w-3xl flex flex-col items-center justify-center">
-                    <div className="flex flex-col items-center gap-y-6">
-                        <div className="relative inline-flex overflow-hidden rounded-full p-[3px] focus:outline-none">
-                            <span className="absolute inset-0 -z-10 animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-                            <Image
-                                src={siteConfig.owner.photo}
-                                alt="Me"
-                                height={90}
-                                width={90}
-                                priority
-                                className="aspect-square rounded-full object-cover"
-                            />
-                        </div>
-                        <div className="flex gap-1 items-center">
-                            <div className="bg-green-600 rounded-full size-[10px]"/>
-                            <span className="uppercase text-xs text-muted-foreground font-medium">Available for Work</span>
-                        </div>
+                    <div className="relative inline-flex overflow-hidden rounded-full p-[3px] focus:outline-none">
+                        <span className="absolute inset-0 -z-10 animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#F3F4F6_0%,#3B82F6_50%,#F3F4F6_100%)]" />
+                        <Image
+                            src={siteConfig.owner.photo}
+                            alt="Me"
+                            height={90}
+                            width={90}
+                            priority
+                            className="aspect-square rounded-full object-cover"
+                        />
                     </div>
                     <TextGenerateEffect
                         words="Driven by curiosity, focused on innovation."
@@ -45,8 +39,8 @@ export default function Hero() {
                     </p>
                     <Link href={siteConfig.owner.resumeUrl} target="_blank">
                         <MagicButton
-                            title="MY RESUME"
-                            icon={<Icons.externLink className="size-5"/>}
+                            title="My Resume"
+                            icon={<Icons.download className="size-5"/>}
                             position="right"
                         />
                     </Link>
