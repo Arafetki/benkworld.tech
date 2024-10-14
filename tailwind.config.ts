@@ -108,7 +108,18 @@ const config = {
             opacity: '1',
             transform: "translate(-50%,-40%) scale(1)",
           },
-        },               
+        },
+        avatar: {
+          "0%": {
+            borderRadius: "60% 40% 30% 70%/60% 30% 70% 40%"
+          },
+          "50%": {
+            borderRadius: "30% 60% 70% 40%/50% 60% 30% 60%"
+          },
+          "100%": {
+            borderRadius: "60% 40% 30% 70%/60% 30% 70% 40%"
+          }
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -116,7 +127,11 @@ const config = {
         "scrollDown": "circle 2s ease-in-out infinite alternate",
         "shine": "shine 8s ease-in-out infinite",
         "spotlight": "spotlight 2s ease .75s 1 forwards",
+        "avatar": "avatar 6s ease-in-out infinite"
       },
+      backgroundImage: {
+        avatar: "url(/me.jpg)"
+      }
     },
   },
   plugins: [
