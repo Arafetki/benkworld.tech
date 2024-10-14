@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Rubik } from "next/font/google";
-import { siteConfig } from "@/config/site";
+import { SITE_METADATA } from "@/config";
 import { Providers } from "@/components/providers";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import grainImage from "@/assets/grain.jpg";
@@ -17,10 +17,10 @@ const rubik = Rubik({
 
 export const metadata: Metadata = {
   title: {
-    default: siteConfig.title,
-    template: `%s – ${siteConfig.title}`,
+    default: SITE_METADATA.title,
+    template: `%s – ${SITE_METADATA.title}`,
   },
-  description: siteConfig.description,
+  description: SITE_METADATA.description,
 };
 
 export const viewport: Viewport = {

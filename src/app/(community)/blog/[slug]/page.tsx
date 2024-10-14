@@ -10,8 +10,9 @@ import { formatDate } from "@/utils";
 import { Mdx } from "@/components/mdx/mdx-components";
 import RSS from "rss";
 import {writeFileSync} from "fs";
-import { siteConfig } from "@/config/site";
-import {env} from "@/env.mjs"
+import {env} from "@/env.mjs";
+import { ME } from "@/config";
+
 
 type PostPageProps = {
   params: {
@@ -48,7 +49,7 @@ export async function generateMetadata({params}: PostPageProps): Promise<Metadat
                     width: 1200,
                     height: 630,
                 }
-            ]
+            ],
 
         }
     }
@@ -57,8 +58,10 @@ export async function generateMetadata({params}: PostPageProps): Promise<Metadat
 
 function generateRssFeed() {
 
+    const firstName = ME.name.split(" ")[0];
+
     const feed = new RSS({
-        title: `${siteConfig.owner.firstName}'s Blog | RSS Feed`,
+        title: `${firstName}'s Blog | RSS Feed`,
         description: "The latest IT trends, tips, and more right here!",
         site_url: `${env.NEXT_PUBLIC_SITE_URL}/blog`,
         feed_url: `${env.NEXT_PUBLIC_SITE_URL}/rss.xml`,

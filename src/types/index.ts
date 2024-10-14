@@ -1,24 +1,31 @@
-export type SiteConfig = {
+export type SiteMetaData = {
     title: string
     description: string
-    url: string
-    owner: {
-        firstName: string
-        lastName: string
-        emailAdresse: string
-        photo: string
-        resumeUrl: string
-        socialLinks: SocialLink[]
-    }
+    url?: string
+
 }
 
-export type SocialLink = {
+export type Me = {
+    name: string
+    email: string
+    phone?: string
+    photo: string
+    title: string
+}
+
+export type Address = {
+    street?: string
+    city: string
+    country: string
+}
+
+export type SocialMedia = {
     name :string
     href: string
 }
 
 export type NavItem = {
-    name: string
+    label: string
     href: string
 }
 

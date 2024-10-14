@@ -2,7 +2,7 @@
 
 import MainNavbar from '@/components/navigation/main-nav';
 import MobileNavMenu from '../navigation/mobile-nav';
-import { navItems } from '@/config/nav';
+import { NAV_ITEMS } from '@/config';
 import { useMobileMenu } from '@/hooks/useMobileMenu';
 
 export default function Header() {
@@ -11,8 +11,8 @@ export default function Header() {
 
     return (
         <header>
-                <MainNavbar items={navItems}/>
-                {isMobileMenuOpen && (<MobileNavMenu items={navItems}/>)}
+                <MainNavbar items={NAV_ITEMS}/>
+                {isMobileMenuOpen && (<MobileNavMenu items={NAV_ITEMS}/>)}
         </header>
     );
 }

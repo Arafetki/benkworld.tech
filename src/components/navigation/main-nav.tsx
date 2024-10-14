@@ -1,15 +1,16 @@
 'use client';
 
-import { useEffect } from "react";
 import Link from "next/link";
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import type { NavItem } from "@/types"
 import { Icons } from "@/components/icons";
 import { ThemeSwitcher } from "@/components/theme-switcher";
-import { siteConfig } from "@/config/site";
+import { SITE_METADATA } from "@/config";
 import { useMobileMenu } from "@/hooks/useMobileMenu";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+import type { NavItem } from "@/types";
 
 type MainNavbarProps = {
     items?: Readonly<NavItem[]>
@@ -45,14 +46,14 @@ export default function  MainNavbar({items}: MainNavbarProps) {
                         className="bg-charcoal-400 dark:bg-charcoal-100/95 text-white text-nowrap text-base sm:text-lg font-bold uppercase tracking-tight px-2 py-1 hover:bg-blue-500 dark:hover:bg-blue-500 hover:-rotate-6 transition-all ease-in-out"
                         onClick={()=>{if (isMobileMenuOpen) setFalse()}}
                     >
-                        {siteConfig.title}
+                        {SITE_METADATA.title}
                     </Link>
                 </div>
                 <ul className="hidden sm:flex gap-5">
                     {items?.map(item=>{
                         return (
-                            <li key={item.name}>
-                                <Link href={item.href} className={cn("text-foreground/70 hover:text-foreground font-medium text-sm", pathname===item.href && "text-foreground")}>{item.name}</Link>
+                            <li key={item.label}>
+                                <Link href={item.href} className={cn("text-foreground/70 hover:text-foreground font-medium text-sm", pathname===item.href && "text-foreground")}>{item.label}</Link>
                             </li>
                         );
                     })}

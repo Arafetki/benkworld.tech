@@ -17,8 +17,8 @@ export default function MobileNavMenu({items}: MobileNavMenuProps) {
                 {
                     items.map(item=>{
                         return (
-                            <li key={item.name}>
-                                <Link href={item.href} onClick={setFalse} className='text-foreground/70 hover:text-foreground font-medium'>{item.name}</Link>
+                            <li key={item.label}>
+                                <Link href={item.href} onClick={setFalse} className='text-foreground/70 hover:text-foreground font-medium'>{item.label}</Link>
                             </li>
                         );
                     })
