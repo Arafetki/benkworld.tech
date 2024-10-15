@@ -67,3 +67,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+.home__avatar {
+  background-image: url('../../public/me.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+}
