@@ -1,9 +1,4 @@
 import MagicButton from "@/components/magic-button";
-import {
-  TextRevealCard,
-  TextRevealCardDescription,
-  TextRevealCardTitle,
-} from "@/components/ui/text-reveal-card";
 import { Icons } from "@/components/icons";
 
 export default function About() {

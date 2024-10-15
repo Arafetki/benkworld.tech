@@ -129,9 +129,6 @@ const config = {
         "spotlight": "spotlight 2s ease .75s 1 forwards",
         "avatar": "avatar 6s ease-in-out infinite"
       },
-      backgroundImage: {
-        avatar: "url(/me.jpg)"
-      }
     },
   },
   plugins: [
